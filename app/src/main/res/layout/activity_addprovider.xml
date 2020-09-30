@@ -8,22 +8,22 @@
     android:layout_height="match_parent">
 
     <EditText
-        android:id="@+id/inputNBurden"
+        android:id="@+id/inputCity"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="32dp"
         android:background="@drawable/round_border"
-        android:drawableStart="@drawable/ic_number"
+        android:drawableStart="@drawable/ic_city"
         android:drawablePadding="16dp"
         android:ems="10"
-        android:hint="Quantidade de fardos"
-        android:inputType="number"
+        android:hint="Cidade"
+        android:inputType="text"
         android:padding="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/inputLocation" />
+        app:layout_constraintTop_toBottomOf="@+id/inputCnpj" />
 
     <View
         android:id="@+id/topView"
@@ -53,7 +53,7 @@
         android:layout_marginEnd="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_money" />
+        app:srcCompat="@drawable/ic_house_100" />
 
     <TextView
         android:id="@+id/txtRecivied"
@@ -61,7 +61,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginTop="48dp"
-        android:text="Cadastre os valores recebidos"
+        android:text="Cadastre os dados da empresa receptora"
         android:textColor="@android:color/white"
         android:textSize="24sp"
         android:textStyle="bold"
@@ -71,17 +71,17 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/inputCity"
+        android:id="@+id/inputCompanyName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="36dp"
         android:layout_marginEnd="32dp"
         android:background="@drawable/round_border"
-        android:drawableStart="@drawable/ic_city"
+        android:drawableStart="@drawable/ic_face"
         android:drawablePadding="16dp"
         android:ems="10"
-        android:hint="Município"
+        android:hint="Razão Social"
         android:inputType="text"
         android:padding="16dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -90,25 +90,25 @@
         app:layout_constraintTop_toBottomOf="@+id/view2" />
 
     <EditText
-        android:id="@+id/inputLocation"
+        android:id="@+id/inputCnpj"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="32dp"
         android:background="@drawable/round_border"
-        android:drawableStart="@drawable/ic_lock"
+        android:drawableStart="@drawable/ic_wallet"
         android:drawablePadding="16dp"
         android:ems="10"
-        android:hint="Nome do Destino"
+        android:hint="CNPJ"
         android:inputType="text"
         android:padding="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/inputCity" />
+        app:layout_constraintTop_toBottomOf="@+id/inputCompanyName" />
 
     <EditText
-        android:id="@+id/inputBurden"
+        android:id="@+id/inputUf"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -118,48 +118,29 @@
         android:drawableStart="@drawable/ic_box"
         android:drawablePadding="16dp"
         android:ems="10"
-        android:hint="Valor total dos fardos"
-        android:inputType="textPersonName"
+        android:hint="Estado"
+        android:inputType="text"
         android:padding="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/inputNBurden" />
-
-    <EditText
-        android:id="@+id/inputSlab"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="32dp"
-        android:background="@drawable/round_border"
-        android:drawableStart="@drawable/ic_filter"
-        android:drawablePadding="16dp"
-        android:ems="10"
-        android:hint="Valor da chapa"
-        android:inputType="textPersonName"
-        android:padding="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/inputBurden" />
+        app:layout_constraintTop_toBottomOf="@+id/inputCity" />
 
     <Button
-        android:id="@+id/btnRecivied"
+        android:id="@+id/btnRegisterProvider"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="36dp"
         android:layout_marginEnd="32dp"
         android:background="@drawable/round_bg"
+        android:onClick="onClickInputProvider"
         android:text="Cadastrar"
-        android:onClick="onClickReturn"
         android:textColor="@android:color/white"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/inputSlab" />
+        app:layout_constraintTop_toBottomOf="@+id/inputUf" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

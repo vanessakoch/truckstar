@@ -83,7 +83,7 @@
                         android:layout_marginLeft="12dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Cadastrar \nRecebidos"
+                        android:text="Listar \nEmpresas"
                         android:textColor="#FFF"
                         android:textSize="18sp" />
 

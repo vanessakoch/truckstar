@@ -1,7 +1,9 @@
 package com.example.truckstar.activities;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
@@ -13,6 +15,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.truckstar.R;
+import com.example.truckstar.entities.Provider;
 import com.example.truckstar.entities.User;
 
 import java.util.ArrayList;
@@ -23,7 +26,9 @@ public class MainActivity extends AppCompatActivity {
     public final static int REQUEST_HOME = 1;
     public final static int REQUEST_PROVIDER = 2;
     public final static int REQUEST_ADDPROVIDER = 3;
-    public final static int REQUEST_TRIP = 4;
+    public final static int REQUEST_EDITPROVIDER = 4;
+    public final static int REQUEST_REMOVEPROVIDER = 5;
+
     private boolean loginExists;
 
     EditText inputLogin;
@@ -75,8 +80,4 @@ public class MainActivity extends AppCompatActivity {
 
         }
     }
-
-
-
-
 }

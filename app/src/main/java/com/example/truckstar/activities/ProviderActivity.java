@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.DefaultItemAnimator;
@@ -13,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.truckstar.R;
 import com.example.truckstar.adapters.ProviderAdapter;
+import com.example.truckstar.entities.Provider;
 
 public class ProviderActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
@@ -35,7 +37,26 @@ public class ProviderActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
     }
 
-    public void onClickAddProvider(View view){
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(resultCode == Activity.RESULT_OK && requestCode == MainActivity.REQUEST_EDITPROVIDER){
+            Bundle bundle = data.getExtras();
+            Provider provider = (Provider) bundle.getParcelable("provider");
+            int position = bundle.getInt("position");
+            adapter.edit(provider, position);
+        }
+
+        if(resultCode == Activity.RESULT_OK && requestCode == MainActivity.REQUEST_ADDPROVIDER){
+            Bundle bundle = data.getExtras();
+            Provider provider = (Provider) bundle.getParcelable("provider");
+            adapter.insert(provider);
+        }
+        
+    }
+
+    public void onClickOpenRegister(View view){
         Bundle bundle = new Bundle();
         bundle.putInt("request_code", requestCode);
         Intent intent = new Intent(this, AddProviderActivity.class);
