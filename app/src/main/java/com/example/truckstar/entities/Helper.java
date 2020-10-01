@@ -34,4 +34,13 @@ public class Helper {
     public void setCost(float cost) {
         this.cost = cost;
     }
+
+    @Override
+    public String toString() {
+        return "Helper{" +
+                "name='" + name + '\'' +
+                ", cpf='" + cpf + '\'' +
+                ", cost=" + cost +
+                '}';
+    }
 }

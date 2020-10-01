@@ -16,8 +16,12 @@
             </intent-filter>
         </activity>
         <activity android:name=".activities.HomeActivity"></activity>
-        <activity android:name=".activities.AddProviderActivity"></activity>
         <activity android:name=".activities.ProviderActivity"></activity>
+        <activity android:name=".activities.EditProviderActivity"></activity>
+        <activity android:name=".activities.UserActivity"></activity>
+        <activity android:name=".activities.EditUserActivity"></activity>
+        <activity android:name=".activities.SpendActivity"></activity>
+        <activity android:name=".activities.InsertHelperActivity"></activity>
 
     </application>
 

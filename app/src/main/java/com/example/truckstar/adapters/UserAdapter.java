@@ -14,34 +14,35 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.truckstar.R;
 import com.example.truckstar.activities.EditProviderActivity;
+import com.example.truckstar.activities.EditUserActivity;
 import com.example.truckstar.activities.HomeActivity;
 import com.example.truckstar.database.AppDatabase;
-import com.example.truckstar.entities.Provider;
+import com.example.truckstar.entities.User;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class ProviderAdapter extends RecyclerView.Adapter {
+public class UserAdapter extends RecyclerView.Adapter {
 
-    List<Provider> providerList;
+    List<User> usersList;
     private int recently_removed_position;
-    private Provider recently_removed_provider;
+    private User recently_removed_user;
     AppCompatActivity activity;
     AppDatabase db;
 
-    public ProviderAdapter(AppCompatActivity activity) {
+    public UserAdapter(AppCompatActivity activity) {
         this.activity = activity;
-        this.providerList = new ArrayList<Provider>();
+        this.usersList = new ArrayList<User>();
         db = AppDatabase.getDatabase(activity);
 
         AppDatabase.databaseWriteExecutor.execute(new Runnable() {
             @Override
             public void run() {
-                List<Provider> list = db.providerDao().getAll();
-                for(Provider p : list)
-                    providerList.add(p);
+                List<User> list = db.userDao().getAll();
+                for(User p : list)
+                    usersList.add(p);
             }
         });
     }
@@ -49,57 +50,55 @@ public class ProviderAdapter extends RecyclerView.Adapter {
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_item, parent, false);
-        ProviderViewHolder viewHolder = new ProviderViewHolder(view);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_user, parent, false);
+        UserViewHolder viewHolder = new UserViewHolder(view);
         return viewHolder;
     }
 
     @Override
     public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder holder, final int position) {
-        ProviderViewHolder viewHolder = (ProviderViewHolder) holder;
-        viewHolder.txtNameProvider.setText(providerList.get(position).getName());
-        viewHolder.txtCnpj.setText(providerList.get(position).getCnpj());
-        viewHolder.txtLocation.setText(providerList.get(position).getCityUf());
-        viewHolder.txtBales.setText(providerList.get(position).getBalesNCash());
+        UserViewHolder viewHolder = (UserViewHolder) holder;
+        viewHolder.txtNameUser.setText(usersList.get(position).getName());
+        viewHolder.txtNickUser.setText(usersList.get(position).getNickname());
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(activity.getBaseContext(), EditProviderActivity.class);
+                Intent intent = new Intent(activity.getBaseContext(), EditUserActivity.class);
                 Bundle bundle = new Bundle();
-                bundle.putParcelable("provider", providerList.get(holder.getAdapterPosition()));
+                bundle.putParcelable("user", usersList.get(holder.getAdapterPosition()));
                 bundle.putInt("position", holder.getAdapterPosition());
-                bundle.putInt("request_code", HomeActivity.REQUEST_EDIT_PROVIDER);
+                bundle.putInt("request_code", HomeActivity.REQUEST_EDIT_USER);
                 intent.putExtras(bundle);
-                activity.startActivityForResult(intent, HomeActivity.REQUEST_EDIT_PROVIDER);
+                activity.startActivityForResult(intent, HomeActivity.REQUEST_EDIT_USER);
             }
         });
 
-        viewHolder.btnRemoveProvider.setOnClickListener(new View.OnClickListener() {
+        viewHolder.btnRemoveUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               remove(position);
+                remove(position);
             }
         });
     }
 
     @Override
     public int getItemCount() {
-        return providerList.size();
+        return usersList.size();
     }
 
     public void remove(final int position) {
         recently_removed_position = position;
-        recently_removed_provider = providerList.get(position);
+        recently_removed_user = usersList.get(position);
 
         AppDatabase.databaseWriteExecutor.execute(new Runnable() {
             @Override
             public void run() {
-                db.providerDao().deleteProvider(recently_removed_provider);
+                db.userDao().deleteUser(recently_removed_user);
             }
         });
 
-        providerList.remove(position);
+        usersList.remove(position);
         notifyItemRemoved(position);
         notifyItemRangeChanged(position, this.getItemCount());
 
@@ -110,50 +109,47 @@ public class ProviderAdapter extends RecyclerView.Adapter {
                 AppDatabase.databaseWriteExecutor.execute(new Runnable() {
                     @Override
                     public void run() {
-                        db.providerDao().insertProvider(recently_removed_provider);
+                        db.userDao().insertUser(recently_removed_user);
                     }
                 });
-                providerList.add(recently_removed_position,recently_removed_provider);
+                usersList.add(recently_removed_position, recently_removed_user);
                 notifyItemInserted(recently_removed_position);
             }
         });
         snackbar.show();
     }
 
-    public void insert(final Provider provider){
+    public void insert(final User user){
 
         AppDatabase.databaseWriteExecutor.execute(new Runnable() {
             @Override
             public void run() {
-                db.providerDao().insertProvider(provider);
+                db.userDao().insertUser(user);
             }
         });
-        providerList.add(provider);
+        usersList.add(user);
         notifyItemInserted(getItemCount());
     }
 
     public void move(int fromPosition, int toPosition){
         if (fromPosition < toPosition)
             for (int i = fromPosition; i < toPosition; i++)
-                Collections.swap(providerList, i, i+1);
+                Collections.swap(usersList, i, i+1);
         else
             for (int i = fromPosition; i > toPosition; i--)
-                Collections.swap(providerList, i, i-1);
+                Collections.swap(usersList, i, i-1);
         notifyItemMoved(fromPosition,toPosition);
     }
 
-    public void edit(final Provider provider, final int position) {
-        providerList.get(position).setName(provider.getName());
-        providerList.get(position).setCnpj(provider.getCnpj());
-        providerList.get(position).setCity(provider.getCity());
-        providerList.get(position).setUf(provider.getUf());
-        providerList.get(position).setNBales(provider.getNBales());
-        providerList.get(position).setCashBales(provider.getCashBales());
+    public void edit(final User user, final int position) {
+        usersList.get(position).setName(user.getName());
+        usersList.get(position).setNickname(user.getNickname());
+        usersList.get(position).setPassword(user.getPassword());
 
         AppDatabase.databaseWriteExecutor.execute(new Runnable() {
             @Override
             public void run() {
-                db.providerDao().updateProvider(provider);
+                db.userDao().updateUser(user);
             }
         });
         notifyItemChanged(position);
@@ -163,33 +159,27 @@ public class ProviderAdapter extends RecyclerView.Adapter {
         AppDatabase.databaseWriteExecutor.execute(new Runnable() {
             @Override
             public void run() {
-                db.providerDao().deleteAll();
+                db.userDao().deleteAll();
             }
         });
-        while (!providerList.isEmpty()){
-            providerList.remove(0);
+        while (!usersList.isEmpty()){
+            usersList.remove(0);
             notifyItemRemoved(0);
             notifyItemRangeChanged(0,this.getItemCount());
         }
     }
 
-    public static class ProviderViewHolder extends RecyclerView.ViewHolder{
+    public static class UserViewHolder extends RecyclerView.ViewHolder{
+        TextView txtNameUser;
+        TextView txtNickUser;
+        ImageView btnRemoveUser;
 
-        TextView txtNameProvider;
-        TextView txtCnpj;
-        TextView txtLocation;
-        TextView txtBales;
-        ImageView btnRemoveProvider;
-
-        public ProviderViewHolder(@NonNull View itemView) {
+        public UserViewHolder(@NonNull View itemView) {
             super(itemView);
             itemView.setTag(this);
-            txtNameProvider = (TextView) itemView.findViewById(R.id.txtNameProvider);
-            txtCnpj = (TextView) itemView.findViewById(R.id.txtCnpj);
-            txtLocation = (TextView) itemView.findViewById(R.id.txtLocation);
-            txtBales = (TextView) itemView.findViewById(R.id.txtBales);
-
-            btnRemoveProvider = (ImageView) itemView.findViewById(R.id.btnRemoveProvider);
+            txtNameUser = (TextView) itemView.findViewById(R.id.txtNameUser);
+            txtNickUser = (TextView) itemView.findViewById(R.id.txtNickUser);
+            btnRemoveUser = (ImageView) itemView.findViewById(R.id.btnRemoveUser);
         }
     }
 }

@@ -1,40 +1,36 @@
 package com.example.truckstar.entities;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+
 public class Trip {
-    private int nBurden;
-    private float totalBurden;
     private float mileage;
     private Provider provider;
-    private Helper helper;
     private User user;
     private String date;
     private String hour;
+    List<Helper> helpers;
 
-    public Trip(int nBurden, float totalBurden, float mileage, Provider provider, Helper helper, User user, String date, String hour) {
-        this.nBurden = nBurden;
-        this.totalBurden = totalBurden;
+    public Trip(float mileage, Provider provider, User user) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        SimpleDateFormat dateFormat_hora = new SimpleDateFormat("HH:mm:ss");
+        Date data = new Date();
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(data);
+        Date actually_date = calendar.getTime();
+
+        final String full_date = dateFormat.format(actually_date);
+        final String current_time = dateFormat_hora.format(actually_date);
+
         this.mileage = mileage;
         this.provider = provider;
-        this.helper = helper;
         this.user = user;
-        this.date = date;
-        this.hour = hour;
-    }
-
-    public int getnBurden() {
-        return nBurden;
-    }
-
-    public void setnBurden(int nBurden) {
-        this.nBurden = nBurden;
-    }
-
-    public float getTotalBurden() {
-        return totalBurden;
-    }
-
-    public void setTotalBurden(float totalBurden) {
-        this.totalBurden = totalBurden;
+        this.date = full_date;
+        this.hour = current_time;
+        this.helpers = new ArrayList<Helper>();
     }
 
     public float getMileage() {
@@ -53,14 +49,6 @@ public class Trip {
         this.provider = provider;
     }
 
-    public Helper getHelper() {
-        return helper;
-    }
-
-    public void setHelper(Helper helper) {
-        this.helper = helper;
-    }
-
     public User getUser() {
         return user;
     }
@@ -69,19 +57,32 @@ public class Trip {
         this.user = user;
     }
 
-    public String getDate() {
-        return date;
+    public List<Helper> getHelpers() {
+        return helpers;
     }
 
-    public void setDate(String date) {
-        this.date = date;
+    public void setHelpers(List<Helper> helpers) {
+        this.helpers = helpers;
+    }
+
+    public String getDate() {
+        return date;
     }
 
     public String getHour() {
         return hour;
     }
 
-    public void setHour(String hour) {
-        this.hour = hour;
+
+    @Override
+    public String toString() {
+        return "Trip{" +
+                "mileage=" + mileage +
+                ", provider=" + provider +
+                ", user=" + user +
+                ", date='" + date + '\'' +
+                ", hour='" + hour + '\'' +
+                ", helpers=" + helpers +
+                '}';
     }
 }

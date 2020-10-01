@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".activities.AddProviderActivity"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#fff"
+    tools:context=".activities.EditProviderActivity">
 
     <EditText
         android:id="@+id/inputCity"
@@ -24,6 +24,25 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/inputCnpj" />
+
+    <EditText
+        android:id="@+id/inputBalesCash"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="32dp"
+        android:background="@drawable/round_border"
+        android:drawableStart="@drawable/ic_money_24"
+        android:drawablePadding="16dp"
+        android:ems="10"
+        android:hint="Valor Total dos Fardos"
+        android:inputType="numberDecimal"
+        android:padding="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/inputNBales" />
 
     <View
         android:id="@+id/topView"
@@ -61,7 +80,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginTop="48dp"
-        android:text="Cadastre os dados da empresa receptora"
+        android:text="Cadastre os dados do local da entrega"
         android:textColor="@android:color/white"
         android:textSize="24sp"
         android:textStyle="bold"
@@ -75,7 +94,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="32dp"
         android:background="@drawable/round_border"
         android:drawableStart="@drawable/ic_face"
@@ -101,46 +120,65 @@
         android:drawablePadding="16dp"
         android:ems="10"
         android:hint="CNPJ"
-        android:inputType="text"
+        android:inputType="number"
         android:padding="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/inputCompanyName" />
-
-    <EditText
-        android:id="@+id/inputUf"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="32dp"
-        android:background="@drawable/round_border"
-        android:drawableStart="@drawable/ic_box"
-        android:drawablePadding="16dp"
-        android:ems="10"
-        android:hint="Estado"
-        android:inputType="text"
-        android:padding="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/inputCity" />
 
     <Button
         android:id="@+id/btnRegisterProvider"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="32dp"
         android:background="@drawable/round_bg"
-        android:onClick="onClickInputProvider"
-        android:text="Cadastrar"
+        android:onClick="onClickConclude"
+        android:text="Concluir"
         android:textColor="@android:color/white"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/inputUf" />
+        app:layout_constraintTop_toBottomOf="@+id/inputBalesCash" />
+
+    <Spinner
+        android:id="@+id/spinnerUf"
+        style="@style/Widget.AppCompat.Spinner.Underlined"
+        android:layout_width="130dp"
+        android:layout_height="52dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="32dp"
+        android:animationCache="true"
+        android:backgroundTint="@color/colorPrimary"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        android:contentDescription="UF"
+        android:entries="@array/lista_uf"
+        android:popupElevation="50dp"
+        android:spinnerMode="dropdown"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/inputNBales"
+        app:layout_constraintTop_toBottomOf="@+id/inputCity" />
+
+    <EditText
+        android:id="@+id/inputNBales"
+        android:layout_width="192dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="5dp"
+        android:background="@drawable/round_border"
+        android:drawableStart="@drawable/ic_number"
+        android:drawablePadding="16dp"
+        android:ems="10"
+        android:hint="No de Fardos"
+        android:inputType="number"
+        android:padding="16dp"
+        app:layout_constraintEnd_toStartOf="@+id/spinnerUf"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/inputCity" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -3,6 +3,7 @@ package com.example.truckstar.entities;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
@@ -11,6 +12,7 @@ import androidx.room.PrimaryKey;
 public class Provider implements Parcelable {
 
     @PrimaryKey(autoGenerate = true)
+    @NonNull
     @ColumnInfo(name = "id")
     private long id;
     @ColumnInfo(name = "name")
@@ -21,22 +23,30 @@ public class Provider implements Parcelable {
     private String city;
     @ColumnInfo(name = "uf")
     private String uf;
+    @ColumnInfo(name = "nBales")
+    private int nBales;
+    @ColumnInfo(name = "cashBales")
+    private float cashBales;
 
     public Provider(){}
 
-    public Provider(String name, String cnpj, String city, String uf) {
+    public Provider(String name, String cnpj, String city, String uf, int nBales, float cashBales) {
         this.name = name;
         this.cnpj = cnpj;
         this.city = city;
         this.uf = uf;
+        this.nBales = nBales;
+        this.cashBales = cashBales;
     }
 
-    public Provider(long id, String name, String cnpj, String city, String uf) {
+    public Provider(long id, String name, String cnpj, String city, String uf, int nBales, float cashBales) {
         this.id = id;
         this.name = name;
         this.cnpj = cnpj;
         this.city = city;
         this.uf = uf;
+        this.nBales = nBales;
+        this.cashBales = cashBales;
     }
 
     protected Provider(Parcel in) {
@@ -45,6 +55,8 @@ public class Provider implements Parcelable {
         cnpj = in.readString();
         city = in.readString();
         uf = in.readString();
+        nBales = in.readInt();
+        cashBales = in.readFloat();
     }
 
     @Override
@@ -59,6 +71,8 @@ public class Provider implements Parcelable {
         dest.writeString(cnpj);
         dest.writeString(city);
         dest.writeString(uf);
+        dest.writeInt(nBales);
+        dest.writeFloat(cashBales);
     }
 
     public static final Creator<Provider> CREATOR = new Creator<Provider>() {
@@ -71,6 +85,9 @@ public class Provider implements Parcelable {
             p.setCnpj(in.readString());
             p.setCity(in.readString());
             p.setUf(in.readString());
+            p.setNBales(in.readInt());
+            p.setCashBales(in.readFloat());
+
             return p;
         }
 
@@ -120,7 +137,40 @@ public class Provider implements Parcelable {
         this.uf = uf;
     }
 
+    public int getNBales() {
+        return nBales;
+    }
+
+    public void setNBales(int nBales) {
+        this.nBales = nBales;
+    }
+
+    public float getCashBales() {
+        return cashBales;
+    }
+
+    public void setCashBales(float cashBales) {
+        this.cashBales = cashBales;
+    }
+
     public String getCityUf() {
-        return "Localização: " + city + "-" + uf;
+        return "Localização: " + city + " - " + uf;
+    }
+
+    public String getBalesNCash() {
+        return "Fardos: " + nBales + " R$: " + cashBales;
+    }
+
+    @Override
+    public String toString() {
+        return "Provider{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", cnpj='" + cnpj + '\'' +
+                ", city='" + city + '\'' +
+                ", uf='" + uf + '\'' +
+                ", nBales=" + nBales +
+                ", cashBales=" + cashBales +
+                '}';
     }
 }

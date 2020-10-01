@@ -3,7 +3,6 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".activities.MainActivity"
     android:background="#fff"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -44,7 +43,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginTop="48dp"
-        android:text="Você já tem uma conta?"
+        android:text="Dados do usuário"
         android:textColor="@android:color/white"
         android:textSize="24sp"
         android:textStyle="bold"
@@ -54,7 +53,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/inputLogin"
+        android:id="@+id/inputNameUser"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -64,7 +63,7 @@
         android:drawableStart="@drawable/ic_face"
         android:drawablePadding="16dp"
         android:ems="10"
-        android:hint="Login"
+        android:hint="Nome Completo"
         android:inputType="text"
         android:padding="16dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -73,11 +72,30 @@
         app:layout_constraintTop_toBottomOf="@+id/waveView" />
 
     <EditText
-        android:id="@+id/inputPassword"
+        android:id="@+id/inputNickName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="32dp"
+        android:background="@drawable/round_border"
+        android:drawableStart="@drawable/ic_face"
+        android:drawablePadding="16dp"
+        android:ems="10"
+        android:hint="Nome de usuário"
+        android:inputType="text"
+        android:padding="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/inputNameUser" />
+
+    <EditText
+        android:id="@+id/inputPassUser"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="32dp"
         android:background="@drawable/round_border"
         android:drawableStart="@drawable/ic_lock"
@@ -89,40 +107,25 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/inputLogin" />
-
-    <CheckBox
-        android:id="@+id/checkRemember"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="40dp"
-        android:layout_marginEnd="32dp"
-        android:checked="false"
-        android:text="Lembrar-me"
-        android:textColor="@color/colorPrimary"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/inputPassword" />
+        app:layout_constraintTop_toBottomOf="@+id/inputNickName" />
 
 
     <Button
-        android:id="@+id/btnLogin"
+        android:id="@+id/btnSalvarUser"
         android:layout_width="0dp"
         android:layout_height="48dp"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="36dp"
         android:layout_marginEnd="32dp"
         android:background="@drawable/round_bg"
-        android:text="Entrar"
-        android:onClick="onClickLogin"
+        android:onClick="onClickSaveUser"
+        android:text="Salvar"
         android:textColor="@android:color/white"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/checkRemember" />
+        app:layout_constraintTop_toBottomOf="@+id/inputPassUser" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 
