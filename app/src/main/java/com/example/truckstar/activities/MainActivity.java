@@ -8,12 +8,15 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.truckstar.R;
+import com.example.truckstar.database.AppDatabase;
 import com.example.truckstar.entities.User;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class MainActivity extends AppCompatActivity {
     public List<User> userList;
@@ -23,6 +26,9 @@ public class MainActivity extends AppCompatActivity {
     EditText inputPassword;
     CheckBox checkRemember;
     Button btnLogin;
+    User user_login;
+    AppDatabase db;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,36 +40,38 @@ public class MainActivity extends AppCompatActivity {
         checkRemember = (CheckBox) findViewById(R.id.checkRemember);
         btnLogin = (Button) findViewById(R.id.btnLogin);
 
-        userList = new ArrayList<User>();
-        User user = new User("Vanessa", "vanessa", "123");
-        userList.add(user);
-
+        db = AppDatabase.getDatabase(this);
     }
 
-        public void onClickLogin(View v) {
-        /*if (inputLogin.getText().length() == 0 || inputPassword.getText().length() == 0) {
-            Toast.makeText(getApplication(), "É necessário uma conta para entrar!", Toast.LENGTH_LONG).show();
-        }else{
-            for(User user: userList) {
-                if(inputLogin.getText().toString().equals(user.getNickname()) &&
-                        inputPassword.getText().toString().equals(user.getPassword())) {*/
-                    Bundle bundle = new Bundle();
-                    bundle.putInt("request_code", HomeActivity.REQUEST_HOME);
-                    Intent intent = new Intent(this, HomeActivity.class);
-                    intent.putExtras(bundle);
-                    startActivityForResult(intent, HomeActivity.REQUEST_HOME);
-                    loginExists = true;
+    public void onClickLogin(View v) throws InterruptedException {
 
-                   /* Toast.makeText(getApplication(),
-                            "Seja bem vindo(a) " + user.getName(),
-                            Toast.LENGTH_LONG).show();
+        if (inputLogin.getText().length() == 0 || inputPassword.getText().length() == 0) {
+            Toast.makeText(getApplication(), "É necessário uma conta para entrar!", Toast.LENGTH_LONG).show();
+
+        } else {
+            AppDatabase.databaseWriteExecutor.execute(new Runnable() {
+                @Override
+                public void run() {
+                    user_login = db.userDao().getUserAuth(inputLogin.getText().toString(), inputPassword.getText().toString());
                 }
-            }
-            if(!loginExists){
+            });
+            AppDatabase.databaseWriteExecutor.awaitTermination(500,TimeUnit.MILLISECONDS);
+
+            if (user_login != null) {
+                Bundle bundle = new Bundle();
+                bundle.putInt("request_code", HomeActivity.REQUEST_HOME);
+                bundle.putLong("user_id", user_login.getId());
+                Intent intent = new Intent(this, HomeActivity.class);
+                intent.putExtras(bundle);
+                startActivityForResult(intent, HomeActivity.REQUEST_HOME);
+                Toast.makeText(getApplication(),
+                        "Seja bem vindo(a) " + user_login.getName(),
+                        Toast.LENGTH_LONG).show();
+            } else {
                 Toast.makeText(getApplication(),
                         "Usuário e/ou Senha incorretos!",
                         Toast.LENGTH_LONG).show();
             }
-        }*/
+        }
     }
 }

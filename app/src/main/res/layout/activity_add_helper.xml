@@ -3,7 +3,6 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".activities.MainActivity"
     android:background="#fff"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -119,7 +118,7 @@
         android:layout_marginTop="32dp"
         android:layout_marginEnd="32dp"
         android:background="@drawable/round_bg"
-        android:onClick="onClickLogin"
+        android:onClick="onClickRegisterHelper"
         android:text="Cadastrar"
         android:textColor="@android:color/white"
         android:textStyle="bold"

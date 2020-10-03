@@ -6,21 +6,23 @@ import android.os.Parcelable;
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "user")
 public class User implements Parcelable {
     @PrimaryKey(autoGenerate = true)
     @NonNull
-    @ColumnInfo(name = "id")
+    @ColumnInfo(name = "id_user")
     private long id;
-    @ColumnInfo(name = "name")
+    @ColumnInfo(name = "user_name")
     private String name;
     @ColumnInfo(name = "nickname")
     private String nickname;
     @ColumnInfo(name = "password")
     private String password;
 
+    @Ignore
     public User(){}
 
     public User(long id, String name, String nickname, String password) {
@@ -30,6 +32,7 @@ public class User implements Parcelable {
         this.password = password;
     }
 
+    @Ignore
     public User(String name, String nickname, String password) {
         this.name = name;
         this.nickname = nickname;
@@ -111,8 +114,6 @@ public class User implements Parcelable {
         return "User{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", nickname='" + nickname + '\'' +
-                ", password='" + password + '\'' +
                 '}';
     }
 }

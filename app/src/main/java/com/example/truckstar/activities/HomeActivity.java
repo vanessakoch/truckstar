@@ -20,6 +20,7 @@ public class HomeActivity extends AppCompatActivity {
     public final static int REQUEST_PROVIDER = 9;
 
     int requestCode;
+    long user_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +29,7 @@ public class HomeActivity extends AppCompatActivity {
 
         Bundle bundle = getIntent().getExtras();
         requestCode = bundle.getInt("request_code");
-
+        user_id = bundle.getLong("user_id");
     }
 
     public void onClickProvider(View view){
@@ -49,9 +50,10 @@ public class HomeActivity extends AppCompatActivity {
 
     public void onClickSpend(View view){
         Bundle bundle = new Bundle();
-        bundle.putInt("request_code", requestCode);
+        bundle.putInt("request_code", REQUEST_ADD_SPENDING);
+        bundle.putLong("user_id", user_id);
         Intent intent = new Intent(this, SpendActivity.class);
         intent.putExtras(bundle);
-        startActivityForResult(intent, requestCode);
+        startActivityForResult(intent, REQUEST_ADD_SPENDING);
     }
 }

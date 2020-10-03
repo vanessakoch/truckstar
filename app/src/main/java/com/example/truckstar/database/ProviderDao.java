@@ -7,21 +7,22 @@ import androidx.room.Query;
 import androidx.room.Update;
 
 import com.example.truckstar.entities.Provider;
+import com.example.truckstar.entities.User;
 
 import java.util.List;
 
 @Dao
 public interface ProviderDao {
-    @Query("SELECT * FROM provider")
+    @Query("SELECT * FROM provider ORDER BY id_provider DESC")
     List<Provider> getAll();
 
-    @Query("SELECT * FROM provider WHERE id IN (:providerIds)")
+    @Query("SELECT * FROM provider WHERE id_provider IN (:providerIds)")
     List<Provider> loadAllByIds(int[] providerIds);
 
-    @Query("SELECT * FROM provider WHERE name = :name")
+    @Query("SELECT * FROM provider WHERE provider_name LIKE :name")
     Provider findByName(String name);
 
-    @Query("SELECT * FROM provider ORDER BY id DESC LIMIT 1")
+    @Query("SELECT * FROM provider ORDER BY id_provider DESC LIMIT 1")
     Provider findLastProvider();
 
     @Query("SELECT * FROM provider WHERE `city` LIKE :city ")
@@ -30,7 +31,10 @@ public interface ProviderDao {
     @Query("SELECT COUNT(*) FROM provider ")
     int countProvider();
 
-    @Query("SELECT id FROM provider WHERE name LIKE :name AND cnpj LIKE :cnpj")
+    @Query("SELECT * FROM provider WHERE id_provider LIKE :id")
+    Provider getById(long id);
+
+    @Query("SELECT id_provider FROM provider WHERE provider_name LIKE :name AND cnpj LIKE :cnpj")
     long getId(String name, String cnpj);
 
     @Insert

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,6 +21,7 @@ import com.example.truckstar.entities.User;
 public class UserActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private UserAdapter adapter;
+    private TextView txtTitleToolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,11 +30,13 @@ public class UserActivity extends AppCompatActivity {
 
         adapter = new UserAdapter(this);
 
+        txtTitleToolbar = (TextView) findViewById(R.id.txtTitleToolbar);
         recyclerView = (RecyclerView) findViewById(R.id.recyclerUser);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(adapter);
 
+        txtTitleToolbar.setText("Lista de Usuários");
         ItemTouchHelper touchHelper = new ItemTouchHelper(new TouchHelpUser(adapter));
         touchHelper.attachToRecyclerView(recyclerView);
     }

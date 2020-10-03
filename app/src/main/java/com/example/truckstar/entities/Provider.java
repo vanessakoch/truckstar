@@ -6,6 +6,7 @@ import android.os.Parcelable;
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "provider")
@@ -13,9 +14,9 @@ public class Provider implements Parcelable {
 
     @PrimaryKey(autoGenerate = true)
     @NonNull
-    @ColumnInfo(name = "id")
-    private long id;
-    @ColumnInfo(name = "name")
+    @ColumnInfo(name = "id_provider")
+    private long id_provider;
+    @ColumnInfo(name = "provider_name")
     private String name;
     @ColumnInfo(name = "cnpj")
     private String cnpj;
@@ -30,6 +31,7 @@ public class Provider implements Parcelable {
 
     public Provider(){}
 
+    @Ignore
     public Provider(String name, String cnpj, String city, String uf, int nBales, float cashBales) {
         this.name = name;
         this.cnpj = cnpj;
@@ -40,7 +42,7 @@ public class Provider implements Parcelable {
     }
 
     public Provider(long id, String name, String cnpj, String city, String uf, int nBales, float cashBales) {
-        this.id = id;
+        this.id_provider = id;
         this.name = name;
         this.cnpj = cnpj;
         this.city = city;
@@ -50,7 +52,7 @@ public class Provider implements Parcelable {
     }
 
     protected Provider(Parcel in) {
-        id = in.readLong();
+        id_provider = in.readLong();
         name = in.readString();
         cnpj = in.readString();
         city = in.readString();
@@ -66,7 +68,7 @@ public class Provider implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeLong(id);
+        dest.writeLong(id_provider);
         dest.writeString(name);
         dest.writeString(cnpj);
         dest.writeString(city);
@@ -80,7 +82,7 @@ public class Provider implements Parcelable {
         @Override
         public Provider createFromParcel(Parcel in) {
             Provider p = new Provider();
-            p.setId(in.readLong());
+            p.setId_provider(in.readLong());
             p.setName(in.readString());
             p.setCnpj(in.readString());
             p.setCity(in.readString());
@@ -97,12 +99,12 @@ public class Provider implements Parcelable {
         }
     };
 
-    public long getId() {
-        return id;
+    public long getId_provider() {
+        return id_provider;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setId_provider(long id_provider) {
+        this.id_provider = id_provider;
     }
 
     public String getName() {
@@ -158,13 +160,13 @@ public class Provider implements Parcelable {
     }
 
     public String getBalesNCash() {
-        return "Fardos: " + nBales + " R$: " + cashBales;
+        return "No de fardos: " + nBales + " / Valor R$: " + cashBales;
     }
 
     @Override
     public String toString() {
         return "Provider{" +
-                "id=" + id +
+                "id=" + id_provider +
                 ", name='" + name + '\'' +
                 ", cnpj='" + cnpj + '\'' +
                 ", city='" + city + '\'' +
