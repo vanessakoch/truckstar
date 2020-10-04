@@ -117,7 +117,7 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="36dp"
         android:layout_marginEnd="32dp"
-        android:background="@drawable/round_bg"
+        android:background="@drawable/round_bg_second"
         android:onClick="onClickSaveUser"
         android:text="Salvar"
         android:textColor="@android:color/white"

@@ -5,10 +5,13 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -102,21 +105,40 @@ public class UserAdapter extends RecyclerView.Adapter {
         notifyItemRemoved(position);
         notifyItemRangeChanged(position, this.getItemCount());
 
-        Snackbar snackbar = Snackbar.make(activity.findViewById(R.id.constraintLayout), "Item deletado",Snackbar.LENGTH_LONG);
-        snackbar.setAction("Desfazer?", new View.OnClickListener() {
+        final AlertDialog.Builder mBuilder = new AlertDialog.Builder(activity);
+        LayoutInflater inflater = LayoutInflater.from(activity);
+        View v = inflater.inflate(R.layout.dialog_remove, null);
+
+        Button btnConfirm = (Button) v.findViewById(R.id.btnConfirm);
+        Button btnCancel = (Button) v.findViewById(R.id.btnCancel);
+
+        mBuilder.setView(v);
+        final AlertDialog dialog = mBuilder.create();
+        dialog.show();
+
+        btnConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View view) {
+                Toast.makeText(view.getContext(), "Removido com sucesso! ", Toast.LENGTH_SHORT).show();
+                dialog.dismiss();
+            }
+        });
+
+        btnCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
                 AppDatabase.databaseWriteExecutor.execute(new Runnable() {
                     @Override
                     public void run() {
                         db.userDao().insertUser(recently_removed_user);
                     }
                 });
+
                 usersList.add(recently_removed_position, recently_removed_user);
                 notifyItemInserted(recently_removed_position);
+                dialog.dismiss();
             }
         });
-        snackbar.show();
     }
 
     public void insert(final User user){

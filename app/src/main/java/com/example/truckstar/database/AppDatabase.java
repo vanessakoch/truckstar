@@ -16,7 +16,7 @@ import com.example.truckstar.entities.User;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-@Database(entities = {Provider.class, User.class, Trip.class, Helper.class}, version = 1, exportSchema = false)
+@Database(entities = {Provider.class, User.class, Trip.class, Helper.class}, version = 2, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
 
     public abstract ProviderDao providerDao();

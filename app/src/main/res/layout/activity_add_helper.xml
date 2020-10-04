@@ -117,7 +117,7 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="32dp"
-        android:background="@drawable/round_bg"
+        android:background="@drawable/round_bg_second"
         android:onClick="onClickRegisterHelper"
         android:text="Cadastrar"
         android:textColor="@android:color/white"

@@ -3,11 +3,18 @@ package com.example.truckstar.activities;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.truckstar.R;
@@ -43,13 +50,24 @@ public class MainActivity extends AppCompatActivity {
     public void onClickLogin(View v) throws InterruptedException {
 
         if (inputLogin.getText().length() == 0 || inputPassword.getText().length() == 0) {
-            Toast.makeText(getApplication(), "É necessário uma conta para entrar!", Toast.LENGTH_LONG).show();
+            inputLogin.setHintTextColor(ColorStateList.valueOf(Color.RED));
+            inputPassword.setHintTextColor(ColorStateList.valueOf(Color.RED));
 
+            LayoutInflater inflater = getLayoutInflater();
+            View layout = inflater.inflate(R.layout.toast_layout, (ViewGroup) findViewById(R.id.toast_root));
+            TextView textToast = layout.findViewById(R.id.toast_text);
+            ImageView toastImage = layout.findViewById(R.id.toast_image);
+            textToast.setText("É necessário inserir uma conta!");
+            toastImage.setImageResource(R.drawable.ic_error_outline);
+            Toast toast = new Toast(getApplicationContext());
+            toast.setDuration(Toast.LENGTH_SHORT);
+            toast.setView(layout);
+            toast.show();
         } else {
             AppDatabase.databaseWriteExecutor.execute(new Runnable() {
                 @Override
                 public void run() {
-                    db.userDao().insertUser(new User("Administrador", "truckstar", "2028"));
+                    db.userDao().insertUser(new User("Admin", "truck", "123"));
                     user_login = db.userDao().getUserAuth(inputLogin.getText().toString(), inputPassword.getText().toString());
                 }
             });
@@ -63,13 +81,28 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(this, HomeActivity.class);
                 intent.putExtras(bundle);
                 startActivityForResult(intent, HomeActivity.REQUEST_HOME);
-                Toast.makeText(getApplication(),
-                        "Seja bem vindo(a) " + user_login.getName(),
-                        Toast.LENGTH_LONG).show();
+
+                LayoutInflater inflater = getLayoutInflater();
+                View layout = inflater.inflate(R.layout.toast_layout, (ViewGroup) findViewById(R.id.toast_root));
+                TextView textToast = layout.findViewById(R.id.toast_text);
+                ImageView toastImage = layout.findViewById(R.id.toast_image);
+                textToast.setText("Seja bem vindo(a) " + user_login.getName());
+                toastImage.setImageResource(R.drawable.ic_emoticon_smile);
+                Toast toast = new Toast(getApplicationContext());
+                toast.setDuration(Toast.LENGTH_SHORT);
+                toast.setView(layout);
+                toast.show();
             } else {
-                Toast.makeText(getApplication(),
-                        "Usuário e/ou Senha incorretos!",
-                        Toast.LENGTH_LONG).show();
+                LayoutInflater inflater = getLayoutInflater();
+                View layout = inflater.inflate(R.layout.toast_layout, (ViewGroup) findViewById(R.id.toast_root));
+                TextView textToast = layout.findViewById(R.id.toast_text);
+                ImageView toastImage = layout.findViewById(R.id.toast_image);
+                textToast.setText("Usuário e/ou Senha incorretos!");
+                toastImage.setImageResource(R.drawable.ic_error_outline);
+                Toast toast = new Toast(getApplicationContext());
+                toast.setDuration(Toast.LENGTH_SHORT);
+                toast.setView(layout);
+                toast.show();
             }
         }
     }

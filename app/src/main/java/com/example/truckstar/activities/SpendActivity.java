@@ -6,11 +6,15 @@ import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -104,9 +108,17 @@ public class SpendActivity  extends AppCompatActivity {
         } else {
             spinnerProvider.getBackground().setColorFilter(Color.parseColor("#FF0000"), PorterDuff.Mode.SRC_ATOP);
 
-            Toast.makeText(getApplication(),
-                    "Volte e cadastre uma empresa destino antes!",
-                    Toast.LENGTH_LONG).show();
+            LayoutInflater inflater = getLayoutInflater();
+            View layout = inflater.inflate(R.layout.toast_layout, (ViewGroup) findViewById(R.id.toast_root));
+            TextView textToast = layout.findViewById(R.id.toast_text);
+            ImageView toastImage = layout.findViewById(R.id.toast_image);
+            textToast.setText("Volte e cadastre uma empresa destino antes!");
+            toastImage.setImageResource(R.drawable.ic_error_outline);
+            Toast toast = new Toast(getApplicationContext());
+            toast.setDuration(Toast.LENGTH_SHORT);
+            toast.setView(layout);
+            toast.show();
+
         }
     }
 
@@ -130,7 +142,16 @@ public class SpendActivity  extends AppCompatActivity {
                     }
                 });
 
-                Toast.makeText(view.getContext(), "Viagem cadastrada com sucesso! ", Toast.LENGTH_SHORT).show();
+                LayoutInflater inflater = getLayoutInflater();
+                View layout = inflater.inflate(R.layout.toast_layout, (ViewGroup) findViewById(R.id.toast_root));
+                TextView textToast = layout.findViewById(R.id.toast_text);
+                ImageView toastImage = layout.findViewById(R.id.toast_image);
+                textToast.setText("Gastos cadastrados com sucesso!");
+                toastImage.setImageResource(R.drawable.ic_emoticon_smile);
+                Toast toast = new Toast(getApplicationContext());
+                toast.setDuration(Toast.LENGTH_SHORT);
+                toast.setView(layout);
+                toast.show();
 
                 Bundle bundle = new Bundle();
                 Intent returnIntent = new Intent();
@@ -143,11 +164,17 @@ public class SpendActivity  extends AppCompatActivity {
         } else {
             spinnerProvider.getBackground().setColorFilter(Color.parseColor("#FF0000"), PorterDuff.Mode.SRC_ATOP);
 
-            Toast.makeText(getApplication(),
-                    "Volte e cadastre uma empresa destino antes!",
-                    Toast.LENGTH_LONG).show();
+            LayoutInflater inflater = getLayoutInflater();
+            View layout = inflater.inflate(R.layout.toast_layout, (ViewGroup) findViewById(R.id.toast_root));
+            TextView textToast = layout.findViewById(R.id.toast_text);
+            ImageView toastImage = layout.findViewById(R.id.toast_image);
+            textToast.setText("Volte e cadastre uma empresa destino antes!");
+            toastImage.setImageResource(R.drawable.ic_error_outline);
+            Toast toast = new Toast(getApplicationContext());
+            toast.setDuration(Toast.LENGTH_SHORT);
+            toast.setView(layout);
+            toast.show();
         }
-
     }
 
 
@@ -167,9 +194,16 @@ public class SpendActivity  extends AppCompatActivity {
             inputCashExtra.setHintTextColor(ColorStateList.valueOf(Color.RED));
         }
 
-        Toast.makeText(getApplication(),
-                "Preencha todos os dados antes de concluir!",
-                Toast.LENGTH_LONG).show();
+        LayoutInflater inflater = getLayoutInflater();
+        View layout = inflater.inflate(R.layout.toast_layout, (ViewGroup) findViewById(R.id.toast_root));
+        TextView textToast = layout.findViewById(R.id.toast_text);
+        ImageView toastImage = layout.findViewById(R.id.toast_image);
+        textToast.setText("Preencha todos os dados antes de concluir!");
+        toastImage.setImageResource(R.drawable.ic_error_outline);
+        Toast toast = new Toast(getApplicationContext());
+        toast.setDuration(Toast.LENGTH_SHORT);
+        toast.setView(layout);
+        toast.show();
     }
 
     public void onClickReturn(View view) {

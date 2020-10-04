@@ -7,8 +7,11 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
@@ -78,7 +81,16 @@ public class InsertHelperActivity extends AppCompatActivity {
             btnConfirm.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Toast.makeText(view.getContext(), "Viagem cadastrada com sucesso! ", Toast.LENGTH_SHORT).show();
+                    LayoutInflater inflater = getLayoutInflater();
+                    View layout = inflater.inflate(R.layout.toast_layout, (ViewGroup) findViewById(R.id.toast_root));
+                    TextView textToast = layout.findViewById(R.id.toast_text);
+                    ImageView toastImage = layout.findViewById(R.id.toast_image);
+                    textToast.setText("Gastos cadastrados com sucesso!");
+                    toastImage.setImageResource(R.drawable.ic_emoticon_smile);
+                    Toast toast = new Toast(getApplicationContext());
+                    toast.setDuration(Toast.LENGTH_SHORT);
+                    toast.setView(layout);
+                    toast.show();
 
                     Bundle bundle = new Bundle();
                     Intent returnIntent = new Intent();
@@ -101,18 +113,20 @@ public class InsertHelperActivity extends AppCompatActivity {
             });
 
         } else {
-            if (nameHelper.equals("")) {
-                inputNameHelper.setHintTextColor(ColorStateList.valueOf(Color.RED));
-            }
-            if (cpfHelper.equals("")) {
-                inputCpfHelper.setHintTextColor(ColorStateList.valueOf(Color.RED));
-            }
-            if (helperValue.equals("")) {
-                inputHelperValue.setHintTextColor(ColorStateList.valueOf(Color.RED));
-            }
-            Toast.makeText(getApplication(),
-                    "Preencha todos os dados antes de concluir!",
-                    Toast.LENGTH_LONG).show();
+            inputNameHelper.setHintTextColor(ColorStateList.valueOf(Color.RED));
+            inputCpfHelper.setHintTextColor(ColorStateList.valueOf(Color.RED));
+            inputHelperValue.setHintTextColor(ColorStateList.valueOf(Color.RED));
+
+            LayoutInflater inflater = getLayoutInflater();
+            View layout = inflater.inflate(R.layout.toast_layout, (ViewGroup) findViewById(R.id.toast_root));
+            TextView textToast = layout.findViewById(R.id.toast_text);
+            ImageView toastImage = layout.findViewById(R.id.toast_image);
+            textToast.setText("Preencha todos os dados antes de concluir!");
+            toastImage.setImageResource(R.drawable.ic_error_outline);
+            Toast toast = new Toast(getApplicationContext());
+            toast.setDuration(Toast.LENGTH_SHORT);
+            toast.setView(layout);
+            toast.show();
         }
     }
 }

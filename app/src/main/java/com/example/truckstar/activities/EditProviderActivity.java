@@ -8,10 +8,14 @@ import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.provider.CalendarContract;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -90,6 +94,17 @@ public class EditProviderActivity extends AppCompatActivity {
 
             bundle.putParcelable("provider", provider);
 
+            LayoutInflater inflater = getLayoutInflater();
+            View layout = inflater.inflate(R.layout.toast_layout, (ViewGroup) findViewById(R.id.toast_root));
+            TextView textToast = layout.findViewById(R.id.toast_text);
+            ImageView toastImage = layout.findViewById(R.id.toast_image);
+            textToast.setText("Viagem salva com sucesso!");
+            toastImage.setImageResource(R.drawable.ic_emoticon_smile);
+            Toast toast = new Toast(getApplicationContext());
+            toast.setDuration(Toast.LENGTH_SHORT);
+            toast.setView(layout);
+            toast.show();
+
             Intent returnIntent = new Intent();
             returnIntent.putExtras(bundle);
             setResult(Activity.RESULT_OK, returnIntent);
@@ -114,9 +129,16 @@ public class EditProviderActivity extends AppCompatActivity {
                 inputBalesCash.setHintTextColor(ColorStateList.valueOf(Color.RED));
             }
 
-            Toast.makeText(getApplication(),
-                "Preencha todos os dados antes de concluir!",
-                Toast.LENGTH_LONG).show();
+            LayoutInflater inflater = getLayoutInflater();
+            View layout = inflater.inflate(R.layout.toast_layout, (ViewGroup) findViewById(R.id.toast_root));
+            TextView textToast = layout.findViewById(R.id.toast_text);
+            ImageView toastImage = layout.findViewById(R.id.toast_image);
+            textToast.setText("Preencha todos os dados antes de concluir!");
+            toastImage.setImageResource(R.drawable.ic_error_outline);
+            Toast toast = new Toast(getApplicationContext());
+            toast.setDuration(Toast.LENGTH_SHORT);
+            toast.setView(layout);
+            toast.show();
         }
     }
 

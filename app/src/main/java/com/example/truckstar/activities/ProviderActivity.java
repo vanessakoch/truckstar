@@ -58,7 +58,6 @@ public class ProviderActivity extends AppCompatActivity {
             Provider provider = (Provider) bundle.getParcelable("provider");
             adapter.insert(provider);
         }
-        
     }
 
     public void onClickOpenRegister(View view){

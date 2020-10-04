@@ -28,7 +28,7 @@
         android:id="@+id/txtinformation"
         android:layout_width="match_parent"
         android:layout_height="85dp"
-        android:text="Você deseja concluir a viagem ou adicionar mais ajudantes?"
+        android:text="Tem certeza que deseja apagar esse registro permanentemente?"
         android:textAlignment="center"
         android:textColor="@color/blackText"
         android:textSize="18sp" />
@@ -40,21 +40,21 @@
         android:textAlignment="center">
 
         <Button
-            android:id="@+id/btnAddMore"
-            android:layout_width="160dp"
+            android:id="@+id/btnCancel"
+            android:layout_width="155dp"
             android:layout_height="wrap_content"
             android:background="@color/colorPrimary"
-            android:text="Adicionar mais"
+            android:text="Cancelar"
             android:textColor="#FFFFFF"
             android:textStyle="bold" />
 
         <Button
-            android:id="@+id/btnConclude"
-            android:layout_width="160dp"
+            android:id="@+id/btnConfirm"
+            android:layout_width="155dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:background="@color/colorAccent"
-            android:text="Concluir"
+            android:text="Confirmar"
             android:textColor="#fff"
             android:textStyle="bold" />
     </LinearLayout>
