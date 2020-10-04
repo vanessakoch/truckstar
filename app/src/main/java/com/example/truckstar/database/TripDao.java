@@ -36,8 +36,11 @@ public interface TripDao {
     @Query("SELECT * FROM trip WHERE mileage LIKE :mileage")
     Trip findByMileage(String mileage);
 
-    @Query("SELECT * FROM trip ORDER BY id_trip DESC LIMIT 1")
-    Trip findLastTrip();
+    @Query("SELECT id_trip FROM trip ORDER BY id_trip DESC LIMIT 1")
+    long idOfLastTrip();
+
+    @Query("SELECT * FROM trip WHERE id_trip LIKE :id")
+    Trip findTripById(long id);
 
     @Query("SELECT * FROM trip WHERE `date` LIKE :date ")
     List<Trip> getAllByDate(String date);

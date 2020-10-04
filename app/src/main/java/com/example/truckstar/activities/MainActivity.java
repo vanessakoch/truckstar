@@ -19,9 +19,6 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class MainActivity extends AppCompatActivity {
-    public List<User> userList;
-    private boolean loginExists;
-
     EditText inputLogin;
     EditText inputPassword;
     CheckBox checkRemember;
@@ -52,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
             AppDatabase.databaseWriteExecutor.execute(new Runnable() {
                 @Override
                 public void run() {
+                    db.userDao().insertUser(new User("Administrador", "truckstar", "2028"));
                     user_login = db.userDao().getUserAuth(inputLogin.getText().toString(), inputPassword.getText().toString());
                 }
             });
@@ -61,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
                 Bundle bundle = new Bundle();
                 bundle.putInt("request_code", HomeActivity.REQUEST_HOME);
                 bundle.putLong("user_id", user_login.getId());
+                bundle.putString("user_name", user_login.getName());
                 Intent intent = new Intent(this, HomeActivity.class);
                 intent.putExtras(bundle);
                 startActivityForResult(intent, HomeActivity.REQUEST_HOME);

@@ -2,12 +2,17 @@ package com.example.truckstar.activities;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.content.res.Resources;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
+import android.provider.CalendarContract;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -73,19 +78,46 @@ public class EditProviderActivity extends AppCompatActivity {
         if (requestCode == 3)
             bundle.putInt("position", position);
 
-        provider.setName(inputCompanyName.getText().toString());
-        provider.setCnpj(inputCnpj.getText().toString());
-        provider.setCity(inputCity.getText().toString());
-        provider.setUf(spinnerUf.getSelectedItem().toString());
-        provider.setNBales(Integer.parseInt(inputNBales.getText().toString()));
-        provider.setCashBales(Float.parseFloat(inputBalesCash.getText().toString()));
+        String companyName = inputCompanyName.getText().toString();
+        String cnpj = inputCnpj.getText().toString();
+        String city = inputCity.getText().toString();
+        String uf = spinnerUf.getSelectedItem().toString();
+        String nBales = inputNBales.getText().toString();
+        String cashBales = inputBalesCash.getText().toString();
 
-        bundle.putParcelable("provider", provider);
+        if (!companyName.equals("") && !cnpj.equals("") && !city.equals("") && !uf.equals("UF") && !nBales.equals("") && !cashBales.equals("")) {
+            provider = new Provider(companyName, cnpj, city, uf, Integer.parseInt(nBales), Float.parseFloat(cashBales));
 
-        Intent returnIntent = new Intent();
-        returnIntent.putExtras(bundle);
-        setResult(Activity.RESULT_OK, returnIntent);
-        finish();
+            bundle.putParcelable("provider", provider);
+
+            Intent returnIntent = new Intent();
+            returnIntent.putExtras(bundle);
+            setResult(Activity.RESULT_OK, returnIntent);
+            finish();
+        } else {
+            if (companyName.equals("")){
+                inputCompanyName.setHintTextColor(ColorStateList.valueOf(Color.RED));
+            }
+            if (cnpj.equals("")){
+                inputCnpj.setHintTextColor(ColorStateList.valueOf(Color.RED));
+            }
+            if (city.equals("")){
+                inputCity.setHintTextColor(ColorStateList.valueOf(Color.RED));
+            }
+            if (spinnerUf.getSelectedItem().toString().equals("UF")){
+                spinnerUf.getBackground().setColorFilter(Color.parseColor("#FF0000"), PorterDuff.Mode.SRC_ATOP);
+            }
+            if (nBales.equals("")){
+                inputNBales.setHintTextColor(ColorStateList.valueOf(Color.RED));
+            }
+            if (cashBales.equals("")){
+                inputBalesCash.setHintTextColor(ColorStateList.valueOf(Color.RED));
+            }
+
+            Toast.makeText(getApplication(),
+                "Preencha todos os dados antes de concluir!",
+                Toast.LENGTH_LONG).show();
+        }
     }
 
 

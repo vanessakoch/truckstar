@@ -59,7 +59,7 @@ public class UserAdapter extends RecyclerView.Adapter {
     public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder holder, final int position) {
         UserViewHolder viewHolder = (UserViewHolder) holder;
         viewHolder.txtNameUser.setText(usersList.get(position).getName());
-        viewHolder.txtNickUser.setText(usersList.get(position).getNickname());
+        viewHolder.txtNickUser.setText("Login: " + usersList.get(position).getNickname());
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -2,11 +2,16 @@ package com.example.truckstar.activities;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.truckstar.R;
@@ -15,12 +20,15 @@ import com.example.truckstar.entities.Helper;
 import com.example.truckstar.entities.Trip;
 import com.example.truckstar.entities.TripWithHelpers;
 
+import java.util.concurrent.TimeUnit;
+
 public class InsertHelperActivity extends AppCompatActivity {
     EditText inputNameHelper;
     EditText inputCpfHelper;
     EditText inputHelperValue;
     Button btnRegistraHelper;
     Helper helper;
+    long id_trip;
     AppDatabase db;
 
     @Override
@@ -35,31 +43,76 @@ public class InsertHelperActivity extends AppCompatActivity {
 
         db = AppDatabase.getDatabase(this);
 
+        Bundle bundle = getIntent().getExtras();
+        id_trip = bundle.getLong("id_trip");
     }
 
-    public void onClickRegisterHelper(View view){
+    public void onClickRegisterHelper(View view) throws InterruptedException {
         String nameHelper = inputNameHelper.getText().toString();
         String cpfHelper = inputCpfHelper.getText().toString();
-        float helperValue = Float.parseFloat(inputHelperValue.getText().toString());
+        String helperValue = inputHelperValue.getText().toString();
 
-        helper = new Helper(nameHelper, 1, cpfHelper, helperValue);
+        if(!nameHelper.equals("") && !cpfHelper.equals("") && !helperValue.equals("")) {
+            helper = new Helper(nameHelper, id_trip, cpfHelper, Float.parseFloat(helperValue));
 
-        AppDatabase.databaseWriteExecutor.execute(new Runnable() {
-            @Override
-            public void run() {
-                db.helperDao().insertHelper(helper);
+            AppDatabase.databaseWriteExecutor.execute(new Runnable() {
+                @Override
+                public void run() {
+                    db.helperDao().insertHelper(helper);
+                    System.out.println(db.tripDao().getTripWithHelpers());
+                }
+            });
+            AppDatabase.databaseWriteExecutor.awaitTermination(500, TimeUnit.MILLISECONDS);
 
+            final AlertDialog.Builder mBuilder = new AlertDialog.Builder(this);
+            LayoutInflater inflater = LayoutInflater.from(this);
+            View v = inflater.inflate(R.layout.dialog_layout, null);
+
+            Button btnAddMore = (Button) v.findViewById(R.id.btnAddMore);
+            Button btnConfirm = (Button) v.findViewById(R.id.btnConclude);
+
+            mBuilder.setView(v);
+            final AlertDialog dialog = mBuilder.create();
+            dialog.show();
+
+            btnConfirm.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Toast.makeText(view.getContext(), "Viagem cadastrada com sucesso! ", Toast.LENGTH_SHORT).show();
+
+                    Bundle bundle = new Bundle();
+                    Intent returnIntent = new Intent();
+                    bundle.putInt("request_code", HomeActivity.REQUEST_ADD_HELPER);
+                    returnIntent.putExtras(bundle);
+                    setResult(Activity.RESULT_OK, returnIntent);
+                    finish();
+                    dialog.dismiss();
+                }
+            });
+
+            btnAddMore.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    inputNameHelper.setText("");
+                    inputCpfHelper.setText("");
+                    inputHelperValue.setText("");
+                    dialog.dismiss();
+                }
+            });
+
+        } else {
+            if (nameHelper.equals("")) {
+                inputNameHelper.setHintTextColor(ColorStateList.valueOf(Color.RED));
             }
-        });
-
-        TripWithHelpers twh = new TripWithHelpers();
-        twh.helpersList.add(helper);
-
-        Bundle bundle = new Bundle();
-        Intent returnIntent = new Intent();
-        returnIntent.putExtras(bundle);
-        setResult(Activity.RESULT_OK, returnIntent);
-        finish();
+            if (cpfHelper.equals("")) {
+                inputCpfHelper.setHintTextColor(ColorStateList.valueOf(Color.RED));
+            }
+            if (helperValue.equals("")) {
+                inputHelperValue.setHintTextColor(ColorStateList.valueOf(Color.RED));
+            }
+            Toast.makeText(getApplication(),
+                    "Preencha todos os dados antes de concluir!",
+                    Toast.LENGTH_LONG).show();
+        }
     }
-
-    }
+}

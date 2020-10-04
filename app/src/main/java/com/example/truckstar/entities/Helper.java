@@ -10,8 +10,11 @@ import androidx.room.ForeignKey;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
+import static androidx.room.ForeignKey.CASCADE;
+
+
 @Entity(foreignKeys = {
-        @ForeignKey(entity = Trip.class, parentColumns = "id_trip", childColumns = "tripId"),
+        @ForeignKey(entity = Trip.class, parentColumns = "id_trip", childColumns = "tripId", onDelete = CASCADE),
 })
 public class Helper implements Parcelable {
     @PrimaryKey(autoGenerate = true)

@@ -11,10 +11,11 @@
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
-        android:text="Selecione primeiramente o destino"
-        android:textColor="#000"
+        android:text="Selecione o destino abaixo:"
+        android:textAlignment="center"
+        android:textColor="@color/colorPrimary"
         android:textSize="18sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/view2" />
@@ -31,8 +32,8 @@
 
     <View
         android:id="@+id/view2"
-        android:layout_width="400dp"
-        android:layout_height="100dp"
+        android:layout_width="399dp"
+        android:layout_height="82dp"
         android:background="@drawable/ic_wave"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -141,16 +142,33 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="32dp"
         android:background="@drawable/round_bg"
-        android:onClick="onClickRegisterSpend"
-        android:text="Página Seguinte"
+        android:onClick="onClickRegisterSpendWithHelper"
+        android:text="Adicionar Ajudante"
         android:textColor="@android:color/white"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/inputCashExtra" />
+
+    <Button
+        android:id="@+id/btnTripConclude"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="32dp"
+        android:background="@drawable/round_bg"
+        android:onClick="onClickRegisterSpend"
+        android:text="Concluir gastos da viagem"
+        android:textColor="@android:color/white"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnRecivied" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

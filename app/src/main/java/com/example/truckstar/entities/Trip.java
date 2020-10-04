@@ -14,9 +14,11 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+import static androidx.room.ForeignKey.CASCADE;
+
 @Entity(foreignKeys = {
-        @ForeignKey(entity = User.class, parentColumns = "id_user", childColumns = "userId"),
-        @ForeignKey(entity = Provider.class, parentColumns = "id_provider", childColumns = "providerId")
+        @ForeignKey(entity = User.class, parentColumns = "id_user", childColumns = "userId", onDelete = CASCADE),
+        @ForeignKey(entity = Provider.class, parentColumns = "id_provider", childColumns = "providerId", onDelete = CASCADE)
 })
 public class Trip implements Parcelable {
     @PrimaryKey(autoGenerate = true)
