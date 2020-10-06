@@ -46,14 +46,14 @@ public class ProviderActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if(resultCode == Activity.RESULT_OK && requestCode == HomeActivity.REQUEST_EDIT_PROVIDER){
+        if(resultCode == Activity.RESULT_OK && requestCode == MainActivity.REQUEST_EDIT_PROVIDER){
             Bundle bundle = data.getExtras();
             Provider provider = (Provider) bundle.getParcelable("provider");
             int position = bundle.getInt("position");
             adapter.edit(provider, position);
         }
 
-        if(resultCode == Activity.RESULT_OK && requestCode == HomeActivity.REQUEST_ADD_PROVIDER){
+        if(resultCode == Activity.RESULT_OK && requestCode == MainActivity.REQUEST_ADD_PROVIDER){
             Bundle bundle = data.getExtras();
             Provider provider = (Provider) bundle.getParcelable("provider");
             adapter.insert(provider);
@@ -62,10 +62,10 @@ public class ProviderActivity extends AppCompatActivity {
 
     public void onClickOpenRegister(View view){
         Bundle bundle = new Bundle();
-        bundle.putInt("request_code", HomeActivity.REQUEST_ADD_PROVIDER);
+        bundle.putInt("request_code", MainActivity.REQUEST_ADD_PROVIDER);
         Intent intent = new Intent(this, EditProviderActivity.class);
         intent.putExtras(bundle);
-        startActivityForResult(intent, HomeActivity.REQUEST_ADD_PROVIDER);
+        startActivityForResult(intent, MainActivity.REQUEST_ADD_PROVIDER);
     }
 
     public void onClickReturn(View view) {

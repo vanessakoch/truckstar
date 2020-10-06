@@ -94,7 +94,7 @@ public class InsertHelperActivity extends AppCompatActivity {
 
                     Bundle bundle = new Bundle();
                     Intent returnIntent = new Intent();
-                    bundle.putInt("request_code", HomeActivity.REQUEST_ADD_HELPER);
+                    bundle.putInt("request_code", MainActivity.REQUEST_ADD_HELPER);
                     returnIntent.putExtras(bundle);
                     setResult(Activity.RESULT_OK, returnIntent);
                     finish();

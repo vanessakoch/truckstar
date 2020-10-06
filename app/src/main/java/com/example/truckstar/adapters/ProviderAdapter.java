@@ -1,6 +1,5 @@
 package com.example.truckstar.adapters;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -19,9 +18,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.truckstar.R;
 import com.example.truckstar.activities.EditProviderActivity;
 import com.example.truckstar.activities.HomeActivity;
+import com.example.truckstar.activities.MainActivity;
 import com.example.truckstar.database.AppDatabase;
 import com.example.truckstar.entities.Provider;
-import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -74,16 +73,16 @@ public class ProviderAdapter extends RecyclerView.Adapter {
                 Bundle bundle = new Bundle();
                 bundle.putParcelable("provider", providerList.get(holder.getAdapterPosition()));
                 bundle.putInt("position", holder.getAdapterPosition());
-                bundle.putInt("request_code", HomeActivity.REQUEST_EDIT_PROVIDER);
+                bundle.putInt("request_code", MainActivity.REQUEST_EDIT_PROVIDER);
                 intent.putExtras(bundle);
-                activity.startActivityForResult(intent, HomeActivity.REQUEST_EDIT_PROVIDER);
+                activity.startActivityForResult(intent, MainActivity.REQUEST_EDIT_PROVIDER);
             }
         });
 
         viewHolder.btnRemoveProvider.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                remove(position);
+                    remove(position);
             }
         });
     }
@@ -103,7 +102,6 @@ public class ProviderAdapter extends RecyclerView.Adapter {
                 db.providerDao().deleteProvider(recently_removed_provider);
             }
         });
-
 
         providerList.remove(position);
         notifyItemRemoved(position);
@@ -151,10 +149,11 @@ public class ProviderAdapter extends RecyclerView.Adapter {
             @Override
             public void run() {
                 db.providerDao().insertProvider(provider);
+                providerList.add(provider);
 
             }
         });
-        providerList.add(provider);
+
         notifyItemInserted(getItemCount());
     }
 
@@ -195,7 +194,7 @@ public class ProviderAdapter extends RecyclerView.Adapter {
         while (!providerList.isEmpty()){
             providerList.remove(0);
             notifyItemRemoved(0);
-            notifyItemRangeChanged(0,this.getItemCount());
+            notifyItemRangeChanged(0, this.getItemCount());
         }
     }
 

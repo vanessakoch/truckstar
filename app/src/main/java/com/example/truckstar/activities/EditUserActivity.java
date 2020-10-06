@@ -42,7 +42,7 @@ public class EditUserActivity extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
         requestCode = bundle.getInt("request_code");
 
-        if (requestCode == HomeActivity.REQUEST_EDIT_USER) {
+        if (requestCode == MainActivity.REQUEST_EDIT_USER) {
             user = (User) bundle.getParcelable("user");
             position = bundle.getInt("position");
 
@@ -82,8 +82,6 @@ public class EditUserActivity extends AppCompatActivity {
         returnIntent.putExtras(bundle);
         setResult(Activity.RESULT_OK, returnIntent);
         finish();
-
-
     }
 
 

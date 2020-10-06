@@ -26,6 +26,18 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class MainActivity extends AppCompatActivity {
+    public final static int REQUEST_HOME = 1;
+    public final static int REQUEST_ADD_PROVIDER = 2;
+    public final static int REQUEST_EDIT_PROVIDER = 3;
+    public final static int REQUEST_ADD_SPENDING = 4;
+    public final static int REQUEST_ADD_HELPER = 5;
+    public final static int REQUEST_ADD_USER = 6;
+    public final static int REQUEST_EDIT_USER = 7;
+    public final static int REQUEST_PROVIDER = 8;
+    public final static int REQUEST_USER = 9;
+    public final static int REQUEST_REPORT = 10;
+
+
     EditText inputLogin;
     EditText inputPassword;
     CheckBox checkRemember;
@@ -75,12 +87,12 @@ public class MainActivity extends AppCompatActivity {
 
             if (user_login != null) {
                 Bundle bundle = new Bundle();
-                bundle.putInt("request_code", HomeActivity.REQUEST_HOME);
+                bundle.putInt("request_code", REQUEST_HOME);
                 bundle.putLong("user_id", user_login.getId());
                 bundle.putString("user_name", user_login.getName());
                 Intent intent = new Intent(this, HomeActivity.class);
                 intent.putExtras(bundle);
-                startActivityForResult(intent, HomeActivity.REQUEST_HOME);
+                startActivityForResult(intent, REQUEST_HOME);
 
                 LayoutInflater inflater = getLayoutInflater();
                 View layout = inflater.inflate(R.layout.toast_layout, (ViewGroup) findViewById(R.id.toast_root));

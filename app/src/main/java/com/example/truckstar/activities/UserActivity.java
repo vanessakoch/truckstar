@@ -45,14 +45,14 @@ public class UserActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if(resultCode == Activity.RESULT_OK && requestCode == HomeActivity.REQUEST_EDIT_USER){
+        if(resultCode == Activity.RESULT_OK && requestCode == MainActivity.REQUEST_EDIT_USER){
             Bundle bundle = data.getExtras();
             User user = (User) bundle.getParcelable("user");
             int position = bundle.getInt("position");
             adapter.edit(user, position);
         }
 
-        if(resultCode == Activity.RESULT_OK && requestCode == HomeActivity.REQUEST_ADD_USER){
+        if(resultCode == Activity.RESULT_OK && requestCode == MainActivity.REQUEST_ADD_USER){
             Bundle bundle = data.getExtras();
             User user = (User) bundle.getParcelable("user");
             adapter.insert(user);
@@ -62,10 +62,10 @@ public class UserActivity extends AppCompatActivity {
 
     public void onClickRegisterUser(View view){
         Bundle bundle = new Bundle();
-        bundle.putInt("request_code", HomeActivity.REQUEST_ADD_USER);
+        bundle.putInt("request_code", MainActivity.REQUEST_ADD_USER);
         Intent intent = new Intent(this, EditUserActivity.class);
         intent.putExtras(bundle);
-        startActivityForResult(intent, HomeActivity.REQUEST_ADD_USER);
+        startActivityForResult(intent, MainActivity.REQUEST_ADD_USER);
     }
 
     public void onClickReturn(View view) {

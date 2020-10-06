@@ -52,7 +52,7 @@ public class EditProviderActivity extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
         requestCode = bundle.getInt("request_code");
 
-        if (requestCode == HomeActivity.REQUEST_EDIT_PROVIDER) {
+        if (requestCode == MainActivity.REQUEST_EDIT_PROVIDER) {
             provider = (Provider) bundle.getParcelable("provider");
             position = bundle.getInt("position");
 

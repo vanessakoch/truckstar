@@ -16,9 +16,6 @@ public class TripWithHelpers {
 
     @Override
     public String toString() {
-        return "TripWithHelpers{" +
-                "trip=" + trip +
-                ", helpersList=" + helpersList +
-                '}';
+        return "" + helpersList;
     }
 }

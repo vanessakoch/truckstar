@@ -160,7 +160,7 @@ public class Provider implements Parcelable {
     }
 
     public String getBalesNCash() {
-        return "No de fardos: " + nBales + " / Valor R$: " + cashBales;
+        return "Fardos: " + nBales + " - R$: " + cashBales;
     }
 
     @Override

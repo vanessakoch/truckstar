@@ -19,6 +19,7 @@ import com.example.truckstar.R;
 import com.example.truckstar.activities.EditProviderActivity;
 import com.example.truckstar.activities.EditUserActivity;
 import com.example.truckstar.activities.HomeActivity;
+import com.example.truckstar.activities.MainActivity;
 import com.example.truckstar.database.AppDatabase;
 import com.example.truckstar.entities.User;
 import com.google.android.material.snackbar.Snackbar;
@@ -71,9 +72,9 @@ public class UserAdapter extends RecyclerView.Adapter {
                 Bundle bundle = new Bundle();
                 bundle.putParcelable("user", usersList.get(holder.getAdapterPosition()));
                 bundle.putInt("position", holder.getAdapterPosition());
-                bundle.putInt("request_code", HomeActivity.REQUEST_EDIT_USER);
+                bundle.putInt("request_code", MainActivity.REQUEST_EDIT_USER);
                 intent.putExtras(bundle);
-                activity.startActivityForResult(intent, HomeActivity.REQUEST_EDIT_USER);
+                activity.startActivityForResult(intent, MainActivity.REQUEST_EDIT_USER);
             }
         });
 

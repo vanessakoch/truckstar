@@ -14,16 +14,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.truckstar.R;
 
 public class HomeActivity extends AppCompatActivity {
-    public final static int REQUEST_HOME = 1;
-    public final static int REQUEST_ADD_PROVIDER = 2;
-    public final static int REQUEST_EDIT_PROVIDER = 3;
-    public final static int REQUEST_ADD_SPENDING = 4;
-    public final static int REQUEST_ADD_HELPER = 5;
-    public final static int REQUEST_ADD_USER = 6;
-    public final static int REQUEST_EDIT_USER = 7;
-    public final static int REQUEST_PROVIDER = 8;
-    public final static int REQUEST_USER = 9;
-
     int requestCode;
     long user_id;
     String user_name;
@@ -41,19 +31,27 @@ public class HomeActivity extends AppCompatActivity {
 
     public void onClickProvider(View view){
         Bundle bundle = new Bundle();
-        bundle.putInt("request_code", REQUEST_PROVIDER);
+        bundle.putInt("request_code", MainActivity.REQUEST_PROVIDER);
         Intent intent = new Intent(this, ProviderActivity.class);
         intent.putExtras(bundle);
-        startActivityForResult(intent, REQUEST_PROVIDER);
+        startActivityForResult(intent, MainActivity.REQUEST_PROVIDER);
+    }
+
+    public void onClickReport(View view){
+        Bundle bundle = new Bundle();
+        bundle.putInt("request_code", MainActivity.REQUEST_REPORT);
+        Intent intent = new Intent(this, ReportActivity.class);
+        intent.putExtras(bundle);
+        startActivityForResult(intent, MainActivity.REQUEST_REPORT);
     }
 
     public void onClickUser(View view){
         if(user_name.equals("Admin")) {
             Bundle bundle = new Bundle();
-            bundle.putInt("request_code", REQUEST_USER);
+            bundle.putInt("request_code", MainActivity.REQUEST_USER);
             Intent intent = new Intent(this, UserActivity.class);
             intent.putExtras(bundle);
-            startActivityForResult(intent, REQUEST_USER);
+            startActivityForResult(intent, MainActivity.REQUEST_USER);
         } else {
             LayoutInflater inflater = getLayoutInflater();
             View layout = inflater.inflate(R.layout.toast_layout, (ViewGroup) findViewById(R.id.toast_root));
@@ -70,10 +68,11 @@ public class HomeActivity extends AppCompatActivity {
 
     public void onClickSpend(View view){
         Bundle bundle = new Bundle();
-        bundle.putInt("request_code", REQUEST_ADD_SPENDING);
+        bundle.putInt("request_code", MainActivity.REQUEST_ADD_SPENDING);
         bundle.putLong("user_id", user_id);
         Intent intent = new Intent(this, SpendActivity.class);
         intent.putExtras(bundle);
-        startActivityForResult(intent, REQUEST_ADD_SPENDING);
+        startActivityForResult(intent, MainActivity.REQUEST_ADD_SPENDING);
     }
+
 }

@@ -7,7 +7,6 @@ import androidx.room.Query;
 import androidx.room.Update;
 
 import com.example.truckstar.entities.Provider;
-import com.example.truckstar.entities.User;
 
 import java.util.List;
 

@@ -97,11 +97,11 @@ public class SpendActivity  extends AppCompatActivity {
                 AppDatabase.databaseWriteExecutor.awaitTermination(500, TimeUnit.MILLISECONDS);
 
                 Bundle bundle = new Bundle();
-                bundle.putInt("request_code", HomeActivity.REQUEST_ADD_HELPER);
+                bundle.putInt("request_code", MainActivity.REQUEST_ADD_HELPER);
                 bundle.putLong("id_trip", id_trip);
                 Intent intent = new Intent(this, InsertHelperActivity.class);
                 intent.putExtras(bundle);
-                startActivityForResult(intent, HomeActivity.REQUEST_ADD_HELPER);
+                startActivityForResult(intent, MainActivity.REQUEST_ADD_HELPER);
             } else {
                 colorError(mileage, cart, extra);
             }
@@ -218,7 +218,7 @@ public class SpendActivity  extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (resultCode == Activity.RESULT_OK && requestCode == HomeActivity.REQUEST_ADD_HELPER) {
+        if (resultCode == Activity.RESULT_OK && requestCode == MainActivity.REQUEST_ADD_HELPER) {
             Bundle bundle = new Bundle();
             Intent returnIntent = new Intent();
             returnIntent.putExtras(bundle);

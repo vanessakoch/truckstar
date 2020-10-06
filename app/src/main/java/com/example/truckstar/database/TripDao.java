@@ -8,8 +8,6 @@ import androidx.room.RoomWarnings;
 import androidx.room.Transaction;
 import androidx.room.Update;
 
-import com.example.truckstar.entities.Helper;
-import com.example.truckstar.entities.Provider;
 import com.example.truckstar.entities.Trip;
 import com.example.truckstar.entities.TripWithData;
 import com.example.truckstar.entities.TripWithHelpers;
@@ -20,12 +18,21 @@ import java.util.List;
 public interface TripDao {
 
     @SuppressWarnings(RoomWarnings.CURSOR_MISMATCH)
-    @Query("select * from trip t join user u on id_user = userId join provider p on id_provider = providerId order by userId asc ")
+    @Query("select * from trip t join user u on u.id_user = t.userId join provider p on p.id_provider = t.providerId " +
+            "order by t.id_trip desc ")
     List<TripWithData> getTripWithData();
 
     @Transaction
     @Query("SELECT * FROM trip")
     List<TripWithHelpers> getTripWithHelpers();
+
+    @Transaction
+    @Query("SELECT * FROM trip")
+    List<TripWithData> getTripWithData2();
+
+    @Transaction
+    @Query("SELECT * FROM trip WHERE id_trip LIKE :idTrip")
+    List<TripWithHelpers> getTripHelpersById(long idTrip);
 
     @Query("SELECT * FROM trip ORDER BY id_trip DESC")
     List<Trip> getAll();
