@@ -53,16 +53,7 @@ public class HomeActivity extends AppCompatActivity {
             intent.putExtras(bundle);
             startActivityForResult(intent, MainActivity.REQUEST_USER);
         } else {
-            LayoutInflater inflater = getLayoutInflater();
-            View layout = inflater.inflate(R.layout.toast_layout, (ViewGroup) findViewById(R.id.toast_root));
-            TextView textToast = layout.findViewById(R.id.toast_text);
-            ImageView toastImage = layout.findViewById(R.id.toast_image);
-            textToast.setText("Você não tem permissão para acessar essa tela!");
-            toastImage.setImageResource(R.drawable.ic_error_outline);
-            Toast toast = new Toast(getApplicationContext());
-            toast.setDuration(Toast.LENGTH_SHORT);
-            toast.setView(layout);
-            toast.show();
+            makeToast("Você não tem permissão para acessar essa tela!", R.drawable.ic_error_outline);
         }
     }
 
@@ -73,6 +64,19 @@ public class HomeActivity extends AppCompatActivity {
         Intent intent = new Intent(this, SpendActivity.class);
         intent.putExtras(bundle);
         startActivityForResult(intent, MainActivity.REQUEST_ADD_SPENDING);
+    }
+
+    public void makeToast(String text, int image) {
+        LayoutInflater inflater = getLayoutInflater();
+        View layout = inflater.inflate(R.layout.toast_layout, (ViewGroup) findViewById(R.id.toast_root));
+        TextView textToast = layout.findViewById(R.id.toast_text);
+        ImageView toastImage = layout.findViewById(R.id.toast_image);
+        textToast.setText(text);
+        toastImage.setImageResource(image);
+        Toast toast = new Toast(getApplicationContext());
+        toast.setDuration(Toast.LENGTH_SHORT);
+        toast.setView(layout);
+        toast.show();
     }
 
 }

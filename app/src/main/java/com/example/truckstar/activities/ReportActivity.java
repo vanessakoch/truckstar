@@ -65,7 +65,7 @@ public class ReportActivity extends AppCompatActivity {
         templatePDF.openDocument();
         templatePDF.addMetaData("Viagens", "Gastos", "Vanessa");
         templatePDF.addTitles("Relatório de Gastos das Viagens", "Truck Star Equipamentos");
-        templatePDF.addParagraph("Dados gerados apartir de um banco de dados");
+        templatePDF.addParagraph("");
         templatePDF.createTable(header, getTrips());
         templatePDF.closeDocument();
 

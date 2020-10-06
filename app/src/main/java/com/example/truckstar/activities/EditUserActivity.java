@@ -67,16 +67,7 @@ public class EditUserActivity extends AppCompatActivity {
 
         bundle.putParcelable("user", user);
 
-        LayoutInflater inflater = getLayoutInflater();
-        View layout = inflater.inflate(R.layout.toast_layout, (ViewGroup) findViewById(R.id.toast_root));
-        TextView textToast = layout.findViewById(R.id.toast_text);
-        ImageView toastImage = layout.findViewById(R.id.toast_image);
-        textToast.setText("Usuário salvo com sucesso!");
-        toastImage.setImageResource(R.drawable.ic_emoticon_smile);
-        Toast toast = new Toast(getApplicationContext());
-        toast.setDuration(Toast.LENGTH_SHORT);
-        toast.setView(layout);
-        toast.show();
+        makeToast("Usuário salvo com sucesso!", R.drawable.ic_emoticon_smile);
 
         Intent returnIntent = new Intent();
         returnIntent.putExtras(bundle);
@@ -84,13 +75,24 @@ public class EditUserActivity extends AppCompatActivity {
         finish();
     }
 
-
-
     public void onClickReturn(View view){
         Bundle bundle = new Bundle();
         Intent returnIntent = new Intent();
         returnIntent.putExtras(bundle);
         setResult(Activity.RESULT_OK, returnIntent);
         finish();
+    }
+
+    public void makeToast(String text, int image) {
+        LayoutInflater inflater = getLayoutInflater();
+        View layout = inflater.inflate(R.layout.toast_layout, (ViewGroup) findViewById(R.id.toast_root));
+        TextView textToast = layout.findViewById(R.id.toast_text);
+        ImageView toastImage = layout.findViewById(R.id.toast_image);
+        textToast.setText(text);
+        toastImage.setImageResource(image);
+        Toast toast = new Toast(getApplicationContext());
+        toast.setDuration(Toast.LENGTH_SHORT);
+        toast.setView(layout);
+        toast.show();
     }
 }

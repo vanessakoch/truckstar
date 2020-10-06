@@ -107,18 +107,7 @@ public class SpendActivity  extends AppCompatActivity {
             }
         } else {
             spinnerProvider.getBackground().setColorFilter(Color.parseColor("#FF0000"), PorterDuff.Mode.SRC_ATOP);
-
-            LayoutInflater inflater = getLayoutInflater();
-            View layout = inflater.inflate(R.layout.toast_layout, (ViewGroup) findViewById(R.id.toast_root));
-            TextView textToast = layout.findViewById(R.id.toast_text);
-            ImageView toastImage = layout.findViewById(R.id.toast_image);
-            textToast.setText("Volte e cadastre uma empresa destino antes!");
-            toastImage.setImageResource(R.drawable.ic_error_outline);
-            Toast toast = new Toast(getApplicationContext());
-            toast.setDuration(Toast.LENGTH_SHORT);
-            toast.setView(layout);
-            toast.show();
-
+            makeToast("Volte e cadastre uma empresa destino antes!", R.drawable.ic_error_outline);
         }
     }
 
@@ -141,17 +130,7 @@ public class SpendActivity  extends AppCompatActivity {
                         id_trip = db.tripDao().idOfLastTrip();
                     }
                 });
-
-                LayoutInflater inflater = getLayoutInflater();
-                View layout = inflater.inflate(R.layout.toast_layout, (ViewGroup) findViewById(R.id.toast_root));
-                TextView textToast = layout.findViewById(R.id.toast_text);
-                ImageView toastImage = layout.findViewById(R.id.toast_image);
-                textToast.setText("Gastos cadastrados com sucesso!");
-                toastImage.setImageResource(R.drawable.ic_emoticon_smile);
-                Toast toast = new Toast(getApplicationContext());
-                toast.setDuration(Toast.LENGTH_SHORT);
-                toast.setView(layout);
-                toast.show();
+                makeToast("Gastos cadastrados com sucesso!", R.drawable.ic_emoticon_smile);
 
                 Bundle bundle = new Bundle();
                 Intent returnIntent = new Intent();
@@ -163,17 +142,7 @@ public class SpendActivity  extends AppCompatActivity {
             }
         } else {
             spinnerProvider.getBackground().setColorFilter(Color.parseColor("#FF0000"), PorterDuff.Mode.SRC_ATOP);
-
-            LayoutInflater inflater = getLayoutInflater();
-            View layout = inflater.inflate(R.layout.toast_layout, (ViewGroup) findViewById(R.id.toast_root));
-            TextView textToast = layout.findViewById(R.id.toast_text);
-            ImageView toastImage = layout.findViewById(R.id.toast_image);
-            textToast.setText("Volte e cadastre uma empresa destino antes!");
-            toastImage.setImageResource(R.drawable.ic_error_outline);
-            Toast toast = new Toast(getApplicationContext());
-            toast.setDuration(Toast.LENGTH_SHORT);
-            toast.setView(layout);
-            toast.show();
+            makeToast("Volte e cadastre uma empresa destino antes!", R.drawable.ic_error_outline);
         }
     }
 
@@ -193,17 +162,7 @@ public class SpendActivity  extends AppCompatActivity {
         if (extra.equals("")) {
             inputCashExtra.setHintTextColor(ColorStateList.valueOf(Color.RED));
         }
-
-        LayoutInflater inflater = getLayoutInflater();
-        View layout = inflater.inflate(R.layout.toast_layout, (ViewGroup) findViewById(R.id.toast_root));
-        TextView textToast = layout.findViewById(R.id.toast_text);
-        ImageView toastImage = layout.findViewById(R.id.toast_image);
-        textToast.setText("Preencha todos os dados antes de concluir!");
-        toastImage.setImageResource(R.drawable.ic_error_outline);
-        Toast toast = new Toast(getApplicationContext());
-        toast.setDuration(Toast.LENGTH_SHORT);
-        toast.setView(layout);
-        toast.show();
+        makeToast("Preencha todos os dados antes de concluir!", R.drawable.ic_error_outline);
     }
 
     public void onClickReturn(View view) {
@@ -225,5 +184,18 @@ public class SpendActivity  extends AppCompatActivity {
             setResult(Activity.RESULT_OK, returnIntent);
             finish();
         }
+    }
+
+    public void makeToast(String text, int image) {
+        LayoutInflater inflater = getLayoutInflater();
+        View layout = inflater.inflate(R.layout.toast_layout, (ViewGroup) findViewById(R.id.toast_root));
+        TextView textToast = layout.findViewById(R.id.toast_text);
+        ImageView toastImage = layout.findViewById(R.id.toast_image);
+        textToast.setText(text);
+        toastImage.setImageResource(image);
+        Toast toast = new Toast(getApplicationContext());
+        toast.setDuration(Toast.LENGTH_SHORT);
+        toast.setView(layout);
+        toast.show();
     }
 }

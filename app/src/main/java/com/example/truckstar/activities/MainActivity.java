@@ -65,16 +65,7 @@ public class MainActivity extends AppCompatActivity {
             inputLogin.setHintTextColor(ColorStateList.valueOf(Color.RED));
             inputPassword.setHintTextColor(ColorStateList.valueOf(Color.RED));
 
-            LayoutInflater inflater = getLayoutInflater();
-            View layout = inflater.inflate(R.layout.toast_layout, (ViewGroup) findViewById(R.id.toast_root));
-            TextView textToast = layout.findViewById(R.id.toast_text);
-            ImageView toastImage = layout.findViewById(R.id.toast_image);
-            textToast.setText("É necessário inserir uma conta!");
-            toastImage.setImageResource(R.drawable.ic_error_outline);
-            Toast toast = new Toast(getApplicationContext());
-            toast.setDuration(Toast.LENGTH_SHORT);
-            toast.setView(layout);
-            toast.show();
+            makeToast("É necessário inserir uma conta!", R.drawable.ic_error_outline);
         } else {
             AppDatabase.databaseWriteExecutor.execute(new Runnable() {
                 @Override
@@ -94,28 +85,23 @@ public class MainActivity extends AppCompatActivity {
                 intent.putExtras(bundle);
                 startActivityForResult(intent, REQUEST_HOME);
 
-                LayoutInflater inflater = getLayoutInflater();
-                View layout = inflater.inflate(R.layout.toast_layout, (ViewGroup) findViewById(R.id.toast_root));
-                TextView textToast = layout.findViewById(R.id.toast_text);
-                ImageView toastImage = layout.findViewById(R.id.toast_image);
-                textToast.setText("Seja bem vindo(a) " + user_login.getName());
-                toastImage.setImageResource(R.drawable.ic_emoticon_smile);
-                Toast toast = new Toast(getApplicationContext());
-                toast.setDuration(Toast.LENGTH_SHORT);
-                toast.setView(layout);
-                toast.show();
+                makeToast("Seja bem vindo(a) " + user_login.getName(), R.drawable.ic_emoticon_smile);
             } else {
-                LayoutInflater inflater = getLayoutInflater();
-                View layout = inflater.inflate(R.layout.toast_layout, (ViewGroup) findViewById(R.id.toast_root));
-                TextView textToast = layout.findViewById(R.id.toast_text);
-                ImageView toastImage = layout.findViewById(R.id.toast_image);
-                textToast.setText("Usuário e/ou Senha incorretos!");
-                toastImage.setImageResource(R.drawable.ic_error_outline);
-                Toast toast = new Toast(getApplicationContext());
-                toast.setDuration(Toast.LENGTH_SHORT);
-                toast.setView(layout);
-                toast.show();
+                makeToast("Usuário e/ou Senha incorretos!", R.drawable.ic_error_outline);
             }
         }
+    }
+
+    public void makeToast(String text, int image) {
+        LayoutInflater inflater = getLayoutInflater();
+        View layout = inflater.inflate(R.layout.toast_layout, (ViewGroup) findViewById(R.id.toast_root));
+        TextView textToast = layout.findViewById(R.id.toast_text);
+        ImageView toastImage = layout.findViewById(R.id.toast_image);
+        textToast.setText(text);
+        toastImage.setImageResource(image);
+        Toast toast = new Toast(getApplicationContext());
+        toast.setDuration(Toast.LENGTH_SHORT);
+        toast.setView(layout);
+        toast.show();
     }
 }
