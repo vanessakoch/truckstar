@@ -39,7 +39,7 @@ public class TemplatePDF {
     private Font fTitle = new Font(Font.FontFamily.TIMES_ROMAN, 12, Font.BOLD, BaseColor.BLUE);
     private Font fSubtitle = new Font(Font.FontFamily.TIMES_ROMAN, 8, Font.BOLD);
     private Font fText = new Font(Font.FontFamily.TIMES_ROMAN, 8, Font.BOLD);
-    private Font fHighText = new Font(Font.FontFamily.TIMES_ROMAN, 10);
+    private Font fHighText = new Font(Font.FontFamily.TIMES_ROMAN, 8);
     private String date;
     private String hour;
 
@@ -61,7 +61,6 @@ public class TemplatePDF {
 
     public void openDocument() {
         createFile();
-
         try {
             document = new Document(PageSize.A4);
             pdfWriter = PdfWriter.getInstance(document, new FileOutputStream(pdfFile));
@@ -72,7 +71,9 @@ public class TemplatePDF {
     }
 
     private void createFile() {
-        File folder = new File(Environment.getExternalStorageDirectory().toString(), "ReportsTruck");
+        File folder = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
+                + File.separator + "ReportsTruck");
+
         if(!folder.exists())
             folder.mkdirs();
 

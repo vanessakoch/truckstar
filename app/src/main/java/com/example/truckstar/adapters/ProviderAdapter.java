@@ -82,7 +82,7 @@ public class ProviderAdapter extends RecyclerView.Adapter {
         viewHolder.btnRemoveProvider.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                    remove(position);
+                remove(holder.getAdapterPosition());
             }
         });
     }
@@ -121,7 +121,7 @@ public class ProviderAdapter extends RecyclerView.Adapter {
         btnConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(view.getContext(), "Removido com sucesso! ", Toast.LENGTH_SHORT).show();
+                makeToast("Item removido com sucesso", R.drawable.ic_emoticon_smile);
                 dialog.dismiss();
             }
         });
@@ -143,17 +143,16 @@ public class ProviderAdapter extends RecyclerView.Adapter {
         });
     }
 
-    public void insert(final Provider provider){
+    public void insert(final Provider provider) {
 
         AppDatabase.databaseWriteExecutor.execute(new Runnable() {
             @Override
             public void run() {
                 db.providerDao().insertProvider(provider);
-                providerList.add(provider);
-
             }
         });
 
+        providerList.add(provider);
         notifyItemInserted(getItemCount());
     }
 
@@ -196,6 +195,19 @@ public class ProviderAdapter extends RecyclerView.Adapter {
             notifyItemRemoved(0);
             notifyItemRangeChanged(0, this.getItemCount());
         }
+    }
+
+    public void makeToast(String text, int image) {
+        LayoutInflater inflater = activity.getLayoutInflater();
+        View layout = inflater.inflate(R.layout.toast_layout, (ViewGroup) activity.findViewById(R.id.toast_root));
+        TextView textToast = layout.findViewById(R.id.toast_text);
+        ImageView toastImage = layout.findViewById(R.id.toast_image);
+        textToast.setText(text);
+        toastImage.setImageResource(image);
+        Toast toast = new Toast(activity.getApplicationContext());
+        toast.setDuration(Toast.LENGTH_SHORT);
+        toast.setView(layout);
+        toast.show();
     }
 
     public static class ProviderViewHolder extends RecyclerView.ViewHolder{

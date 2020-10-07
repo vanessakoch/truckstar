@@ -1,5 +1,6 @@
 package com.example.truckstar.activities;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,9 +10,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.truckstar.R;
+import com.example.truckstar.entities.Provider;
 
 public class HomeActivity extends AppCompatActivity {
     int requestCode;
@@ -53,7 +56,7 @@ public class HomeActivity extends AppCompatActivity {
             intent.putExtras(bundle);
             startActivityForResult(intent, MainActivity.REQUEST_USER);
         } else {
-            makeToast("Você não tem permissão para acessar essa tela!", R.drawable.ic_error_outline);
+            makeToast("Usuário sem permissão!", R.drawable.ic_error_outline);
         }
     }
 

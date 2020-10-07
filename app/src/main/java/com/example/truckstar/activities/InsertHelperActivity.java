@@ -95,6 +95,7 @@ public class InsertHelperActivity extends AppCompatActivity {
             btnAddMore.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    makeToast("Insira os dados do novo ajudante!", R.drawable.ic_emoticon_smile);
                     inputNameHelper.setText("");
                     inputCpfHelper.setText("");
                     inputHelperValue.setText("");
@@ -107,7 +108,7 @@ public class InsertHelperActivity extends AppCompatActivity {
             inputCpfHelper.setHintTextColor(ColorStateList.valueOf(Color.RED));
             inputHelperValue.setHintTextColor(ColorStateList.valueOf(Color.RED));
 
-            makeToast("Preencha todos os dados antes de concluir!", R.drawable.ic_error_outline);
+            makeToast("Preencha todos os dados!", R.drawable.ic_error_outline);
         }
     }
 

@@ -56,6 +56,11 @@ public class UserActivity extends AppCompatActivity {
             Bundle bundle = data.getExtras();
             User user = (User) bundle.getParcelable("user");
             adapter.insert(user);
+
+            Intent returnIntent = new Intent();
+            returnIntent.putExtras(bundle);
+            setResult(Activity.RESULT_OK, returnIntent);
+            finish();
         }
 
     }

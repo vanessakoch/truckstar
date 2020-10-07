@@ -37,14 +37,11 @@ public class MainActivity extends AppCompatActivity {
     public final static int REQUEST_USER = 9;
     public final static int REQUEST_REPORT = 10;
 
-
     EditText inputLogin;
     EditText inputPassword;
-    CheckBox checkRemember;
     Button btnLogin;
     User user_login;
     AppDatabase db;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +50,6 @@ public class MainActivity extends AppCompatActivity {
 
         inputLogin = (EditText) findViewById(R.id.inputLogin);
         inputPassword = (EditText) findViewById(R.id.inputPassword);
-        checkRemember = (CheckBox) findViewById(R.id.checkRemember);
         btnLogin = (Button) findViewById(R.id.btnLogin);
 
         db = AppDatabase.getDatabase(this);
@@ -70,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
             AppDatabase.databaseWriteExecutor.execute(new Runnable() {
                 @Override
                 public void run() {
-                    db.userDao().insertUser(new User("Admin", "truck", "123"));
+                    db.userDao().insertUser(new User("Admin", "truckstar", "2028"));
                     user_login = db.userDao().getUserAuth(inputLogin.getText().toString(), inputPassword.getText().toString());
                 }
             });

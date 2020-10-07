@@ -17,18 +17,21 @@ import java.util.List;
 @Dao
 public interface TripDao {
 
+    @Transaction
     @SuppressWarnings(RoomWarnings.CURSOR_MISMATCH)
     @Query("select * from trip t join user u on u.id_user = t.userId join provider p on p.id_provider = t.providerId " +
             "order by t.id_trip desc ")
     List<TripWithData> getTripWithData();
 
     @Transaction
-    @Query("SELECT * FROM trip")
-    List<TripWithHelpers> getTripWithHelpers();
+    @SuppressWarnings(RoomWarnings.CURSOR_MISMATCH)
+    @Query("select * from trip t join user u on u.id_user = t.userId join provider p on p.id_provider = t.providerId " +
+            "WHERE t.date LIKE :date order by t.id_trip desc ")
+    List<TripWithData> getTripWithDataByDate(String date);
 
     @Transaction
     @Query("SELECT * FROM trip")
-    List<TripWithData> getTripWithData2();
+    List<TripWithHelpers> getTripWithHelpers();
 
     @Transaction
     @Query("SELECT * FROM trip WHERE id_trip LIKE :idTrip")

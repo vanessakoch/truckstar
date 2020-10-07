@@ -107,7 +107,7 @@ public class SpendActivity  extends AppCompatActivity {
             }
         } else {
             spinnerProvider.getBackground().setColorFilter(Color.parseColor("#FF0000"), PorterDuff.Mode.SRC_ATOP);
-            makeToast("Volte e cadastre uma empresa destino antes!", R.drawable.ic_error_outline);
+            makeToast("Cadastre uma empresa destino antes!", R.drawable.ic_error_outline);
         }
     }
 
@@ -142,7 +142,7 @@ public class SpendActivity  extends AppCompatActivity {
             }
         } else {
             spinnerProvider.getBackground().setColorFilter(Color.parseColor("#FF0000"), PorterDuff.Mode.SRC_ATOP);
-            makeToast("Volte e cadastre uma empresa destino antes!", R.drawable.ic_error_outline);
+            makeToast("Cadastre uma empresa destino antes!", R.drawable.ic_error_outline);
         }
     }
 
@@ -162,7 +162,7 @@ public class SpendActivity  extends AppCompatActivity {
         if (extra.equals("")) {
             inputCashExtra.setHintTextColor(ColorStateList.valueOf(Color.RED));
         }
-        makeToast("Preencha todos os dados antes de concluir!", R.drawable.ic_error_outline);
+        makeToast("Preencha todos os dados!", R.drawable.ic_error_outline);
     }
 
     public void onClickReturn(View view) {

@@ -2,7 +2,9 @@ package com.example.truckstar.activities;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.content.res.Resources;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -57,22 +59,38 @@ public class EditUserActivity extends AppCompatActivity {
 
     public void onClickSaveUser(View view){
         Bundle bundle = new Bundle();
+        String name = inputNameUser.getText().toString();
+        String nickname = inputNickName.getText().toString();
+        String pass = inputPassUser.getText().toString();
 
         if (requestCode == 7)
             bundle.putInt("position", position);
 
-        user.setName(inputNameUser.getText().toString());
-        user.setNickname(inputNickName.getText().toString());
-        user.setPassword(inputPassUser.getText().toString());
+        if(!name.equals("") && !nickname.equals("") && !pass.equals("")) {
+            user.setName(name);
+            user.setNickname(nickname);
+            user.setPassword(pass);
 
-        bundle.putParcelable("user", user);
+            bundle.putParcelable("user", user);
 
-        makeToast("Usuário salvo com sucesso!", R.drawable.ic_emoticon_smile);
+            makeToast("Usuário salvo com sucesso!", R.drawable.ic_emoticon_smile);
 
-        Intent returnIntent = new Intent();
-        returnIntent.putExtras(bundle);
-        setResult(Activity.RESULT_OK, returnIntent);
-        finish();
+            Intent returnIntent = new Intent();
+            returnIntent.putExtras(bundle);
+            setResult(Activity.RESULT_OK, returnIntent);
+            finish();
+        } else {
+            if (name.equals("")){
+                inputNameUser.setHintTextColor(ColorStateList.valueOf(Color.RED));
+            }
+            if (nickname.equals("")){
+                inputNickName.setHintTextColor(ColorStateList.valueOf(Color.RED));
+            }
+            if (pass.equals("")){
+                inputPassUser.setHintTextColor(ColorStateList.valueOf(Color.RED));
+            }
+            makeToast("Preencha todos os dados!", R.drawable.ic_error_outline);
+        }
     }
 
     public void onClickReturn(View view){

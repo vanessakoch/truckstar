@@ -57,6 +57,11 @@ public class ProviderActivity extends AppCompatActivity {
             Bundle bundle = data.getExtras();
             Provider provider = (Provider) bundle.getParcelable("provider");
             adapter.insert(provider);
+
+            Intent returnIntent = new Intent();
+            returnIntent.putExtras(bundle);
+            setResult(Activity.RESULT_OK, returnIntent);
+            finish();
         }
     }
 

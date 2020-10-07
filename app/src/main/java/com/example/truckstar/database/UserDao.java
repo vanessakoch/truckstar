@@ -12,7 +12,7 @@ import java.util.List;
 
 @Dao
 public interface UserDao {
-    @Query("SELECT * FROM user")
+    @Query("SELECT * FROM user ORDER BY id_user DESC")
     List<User> getAll();
 
     @Query("SELECT * FROM user WHERE id_user IN (:userIds)")

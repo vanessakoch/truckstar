@@ -68,13 +68,17 @@ public class UserAdapter extends RecyclerView.Adapter {
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(activity.getBaseContext(), EditUserActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putParcelable("user", usersList.get(holder.getAdapterPosition()));
-                bundle.putInt("position", holder.getAdapterPosition());
-                bundle.putInt("request_code", MainActivity.REQUEST_EDIT_USER);
-                intent.putExtras(bundle);
-                activity.startActivityForResult(intent, MainActivity.REQUEST_EDIT_USER);
+                if(!usersList.get(holder.getAdapterPosition()).getName().equalsIgnoreCase("Admin")) {
+                    Intent intent = new Intent(activity.getBaseContext(), EditUserActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putParcelable("user", usersList.get(holder.getAdapterPosition()));
+                    bundle.putInt("position", holder.getAdapterPosition());
+                    bundle.putInt("request_code", MainActivity.REQUEST_EDIT_USER);
+                    intent.putExtras(bundle);
+                    activity.startActivityForResult(intent, MainActivity.REQUEST_EDIT_USER);
+                } else {
+                    makeToast("Usuário admin não pode ser editado!", R.drawable.ic_error_outline);
+                }
             }
         });
 
@@ -95,51 +99,55 @@ public class UserAdapter extends RecyclerView.Adapter {
         recently_removed_position = position;
         recently_removed_user = usersList.get(position);
 
-        AppDatabase.databaseWriteExecutor.execute(new Runnable() {
-            @Override
-            public void run() {
-                db.userDao().deleteUser(recently_removed_user);
-            }
-        });
+        if(!recently_removed_user.getName().equalsIgnoreCase("Admin")) {
+            AppDatabase.databaseWriteExecutor.execute(new Runnable() {
+                @Override
+                public void run() {
+                    db.userDao().deleteUser(recently_removed_user);
+                }
+            });
 
-        usersList.remove(position);
-        notifyItemRemoved(position);
-        notifyItemRangeChanged(position, this.getItemCount());
+            usersList.remove(position);
+            notifyItemRemoved(position);
+            notifyItemRangeChanged(position, this.getItemCount());
 
-        final AlertDialog.Builder mBuilder = new AlertDialog.Builder(activity);
-        LayoutInflater inflater = LayoutInflater.from(activity);
-        View v = inflater.inflate(R.layout.dialog_remove, null);
+            final AlertDialog.Builder mBuilder = new AlertDialog.Builder(activity);
+            LayoutInflater inflater = LayoutInflater.from(activity);
+            View v = inflater.inflate(R.layout.dialog_remove, null);
 
-        Button btnConfirm = (Button) v.findViewById(R.id.btnConfirm);
-        Button btnCancel = (Button) v.findViewById(R.id.btnCancel);
+            Button btnConfirm = (Button) v.findViewById(R.id.btnConfirm);
+            Button btnCancel = (Button) v.findViewById(R.id.btnCancel);
 
-        mBuilder.setView(v);
-        final AlertDialog dialog = mBuilder.create();
-        dialog.show();
+            mBuilder.setView(v);
+            final AlertDialog dialog = mBuilder.create();
+            dialog.show();
 
-        btnConfirm.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(view.getContext(), "Removido com sucesso! ", Toast.LENGTH_SHORT).show();
-                dialog.dismiss();
-            }
-        });
+            btnConfirm.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    makeToast("Item removido com sucesso!", R.drawable.ic_emoticon_smile);
+                    dialog.dismiss();
+                }
+            });
 
-        btnCancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                AppDatabase.databaseWriteExecutor.execute(new Runnable() {
-                    @Override
-                    public void run() {
-                        db.userDao().insertUser(recently_removed_user);
-                    }
-                });
+            btnCancel.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    AppDatabase.databaseWriteExecutor.execute(new Runnable() {
+                        @Override
+                        public void run() {
+                            db.userDao().insertUser(recently_removed_user);
+                        }
+                    });
 
-                usersList.add(recently_removed_position, recently_removed_user);
-                notifyItemInserted(recently_removed_position);
-                dialog.dismiss();
-            }
-        });
+                    usersList.add(recently_removed_position, recently_removed_user);
+                    notifyItemInserted(recently_removed_position);
+                    dialog.dismiss();
+                }
+            });
+        } else {
+            makeToast("Usuário admin não pode ser apagado!", R.drawable.ic_error_outline);
+        }
     }
 
     public void insert(final User user){
@@ -162,6 +170,19 @@ public class UserAdapter extends RecyclerView.Adapter {
             for (int i = fromPosition; i > toPosition; i--)
                 Collections.swap(usersList, i, i-1);
         notifyItemMoved(fromPosition,toPosition);
+    }
+
+    public void makeToast(String text, int image) {
+        LayoutInflater inflater = activity.getLayoutInflater();
+        View layout = inflater.inflate(R.layout.toast_layout, (ViewGroup) activity.findViewById(R.id.toast_root));
+        TextView textToast = layout.findViewById(R.id.toast_text);
+        ImageView toastImage = layout.findViewById(R.id.toast_image);
+        textToast.setText(text);
+        toastImage.setImageResource(image);
+        Toast toast = new Toast(activity.getApplicationContext());
+        toast.setDuration(Toast.LENGTH_SHORT);
+        toast.setView(layout);
+        toast.show();
     }
 
     public void edit(final User user, final int position) {

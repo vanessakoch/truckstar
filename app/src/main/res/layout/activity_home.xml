@@ -8,11 +8,9 @@
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="28dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginTop="32dp"
         android:text="Truck Star \nEquipamentos"
         android:textAlignment="center"
         android:textColor="@color/whiteText"
@@ -24,61 +22,57 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:layout_width="464dp"
-        android:layout_height="294dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="100dp"
-        android:layout_marginEnd="8dp"
+        android:id="@+id/imageView5"
+        android:layout_width="0dp"
+        android:layout_height="206dp"
         android:src="@drawable/illustration"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.505"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="330dp"
-        android:orientation="vertical"
-        android:layout_marginStart="0dp"
-        android:layout_marginEnd="0dp"
-        android:layout_marginBottom="0dp"
+        android:id="@+id/linearLayout2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:background="@drawable/bg_menu"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
         <LinearLayout
-            android:paddingLeft="16dp"
-            android:paddingRight="16dp"
-            android:paddingTop="24dp"
-            android:paddingBottom="24dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="3"
             android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            
+            android:paddingLeft="16dp"
+            android:paddingTop="24dp"
+            android:paddingRight="16dp"
+            android:paddingBottom="24dp">
+
             <LinearLayout
-                android:layout_weight="1"
-                android:orientation="vertical"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
 
                 <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginLeft="10dp"
-                    android:background="@drawable/bg_darkgrey"
                     android:layout_width="match_parent"
+                    android:layout_height="120dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/bg_darkgrey"
                     android:onClick="onClickProvider"
-                    android:layout_height="120dp">
+                    android:orientation="vertical">
 
                     <ImageView
-                        android:layout_marginTop="12dp"
-                        android:layout_marginLeft="12dp"
-                        android:layout_marginBottom="18dp"
-                        android:src="@drawable/checked"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="12dp"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginBottom="18dp"
+                        android:src="@drawable/checked" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -93,27 +87,27 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_weight="1"
-                android:orientation="vertical"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
 
                 <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_marginRight="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="120dp"
                     android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
                     android:background="@drawable/bg_darkyellow"
                     android:onClick="onClickSpend"
-                    android:layout_width="match_parent"
-                    android:layout_height="120dp">
+                    android:orientation="vertical">
 
                     <ImageView
-                        android:layout_marginTop="12dp"
-                        android:layout_marginLeft="12dp"
-                        android:layout_marginBottom="18dp"
-                        android:src="@drawable/link"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="12dp"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginBottom="18dp"
+                        android:src="@drawable/link" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -130,28 +124,28 @@
         </LinearLayout>
 
         <LinearLayout
-            android:paddingLeft="16dp"
-            android:paddingRight="16dp"
-            android:paddingBottom="24dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="3"
             android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:paddingBottom="24dp">
 
             <LinearLayout
-                android:layout_weight="1"
-                android:orientation="vertical"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
 
                 <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_marginRight="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="120dp"
                     android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
                     android:background="@drawable/bg_pink"
                     android:onClick="onClickUser"
-                    android:layout_width="match_parent"
-                    android:layout_height="120dp">
+                    android:orientation="vertical">
 
                     <ImageView
                         android:layout_width="wrap_content"
@@ -174,19 +168,19 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_weight="1"
-                android:orientation="vertical"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
 
                 <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_marginRight="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="120dp"
                     android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
                     android:background="@drawable/bg_gray"
                     android:onClick="onClickReport"
-                    android:layout_width="match_parent"
-                    android:layout_height="120dp">
+                    android:orientation="vertical">
 
                     <ImageView
                         android:layout_width="wrap_content"

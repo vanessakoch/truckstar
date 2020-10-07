@@ -78,10 +78,6 @@ public class EditProviderActivity extends AppCompatActivity {
 
     public void onClickConclude(View view){
         Bundle bundle = new Bundle();
-
-        if (requestCode == 3)
-            bundle.putInt("position", position);
-
         String companyName = inputCompanyName.getText().toString();
         String cnpj = inputCnpj.getText().toString();
         String city = inputCity.getText().toString();
@@ -89,8 +85,16 @@ public class EditProviderActivity extends AppCompatActivity {
         String nBales = inputNBales.getText().toString();
         String cashBales = inputBalesCash.getText().toString();
 
+        if (requestCode == 3)
+            bundle.putInt("position", position);
+
         if (!companyName.equals("") && !cnpj.equals("") && !city.equals("") && !uf.equals("UF") && !nBales.equals("") && !cashBales.equals("")) {
-            provider = new Provider(companyName, cnpj, city, uf, Integer.parseInt(nBales), Float.parseFloat(cashBales));
+            provider.setName(companyName);
+            provider.setCnpj(cnpj);
+            provider.setCity(city);
+            provider.setUf(uf);
+            provider.setNBales(Integer.parseInt(nBales));
+            provider.setCashBales(Float.parseFloat(cashBales));
 
             bundle.putParcelable("provider", provider);
 
@@ -119,7 +123,7 @@ public class EditProviderActivity extends AppCompatActivity {
             if (cashBales.equals("")){
                 inputBalesCash.setHintTextColor(ColorStateList.valueOf(Color.RED));
             }
-            makeToast("Preencha todos os dados antes de concluir!", R.drawable.ic_error_outline);
+            makeToast("Preencha todos os dados!", R.drawable.ic_error_outline);
         }
     }
 

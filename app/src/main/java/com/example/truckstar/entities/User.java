@@ -8,6 +8,7 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
+import androidx.room.Transaction;
 
 @Entity(tableName = "user")
 public class User implements Parcelable {

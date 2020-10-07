@@ -156,7 +156,7 @@ public class Provider implements Parcelable {
     }
 
     public String getCityUf() {
-        return "Localização: " + city + " - " + uf;
+        return "" + city + " - " + uf;
     }
 
     public String getBalesNCash() {
