@@ -1,21 +1,14 @@
 package com.example.truckstar.activities;
 
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
-import android.os.Build;
-import android.os.Environment;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.core.content.FileProvider;
-
-import com.example.truckstar.R;
+import com.example.truckstar.BuildConfig;
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.Element;
@@ -76,13 +69,14 @@ public class TemplatePDF {
     }
 
     private void createFile() {
-        File folder = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
-                + File.separator + "ReportsTruck");
+        String foldername = "Truck-report";
+        File folder = new File(context.getFilesDir() + "/" + foldername);
 
         if(!folder.exists())
             folder.mkdirs();
 
         Toast.makeText(context, "Salvo em " + folder.toString(), Toast.LENGTH_SHORT).show();
+
         pdfFile = new File(folder, "Report-" + date + "-" + hour +".pdf");
     }
 
@@ -129,8 +123,30 @@ public class TemplatePDF {
     public void viewPDF() {
         Intent intent = new Intent(context, ViewPDFActivity.class);
         intent.putExtra("path", pdfFile.getAbsolutePath());
+        intent.putExtra("request_code", MainActivity.REQUEST_RETURN_PDF);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(intent);
+    }
+
+    public void viewApp() {
+        if(pdfFile.exists()){
+            Uri uri = FileProvider.getUriForFile(context, BuildConfig.APPLICATION_ID + ".provider", pdfFile);
+
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent.setDataAndType(uri, "application/pdf");
+            try {
+                context.startActivity(intent);
+            } catch (ActivityNotFoundException e) {
+                Toast.makeText(context.getApplicationContext(), "Você não possui programa para abrir esse PDF", Toast.LENGTH_SHORT).show();
+                Intent newIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=com.adobe.reader"));
+                newIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                context.startActivity(newIntent);
+            }
+        } else {
+            Toast.makeText(context.getApplicationContext(), "Arquivo não encontrado!", Toast.LENGTH_SHORT).show();
+        }
     }
 
     public void createTable(String[] header, ArrayList<String[]> arrayList) {

@@ -24,15 +24,16 @@ import com.example.truckstar.entities.Provider;
 import com.example.truckstar.R;
 
 public class EditProviderActivity extends AppCompatActivity {
+    private EditText inputCompanyName;
+    private EditText inputCnpj;
+    private EditText inputCity;
+    private EditText inputNBales;
+    private EditText inputBalesCash;
+    private Spinner spinnerUf;
+    private Button btnRegisterProvider;
+    private Provider provider;
+    private TextView txtTitleToolbar;
 
-    EditText inputCompanyName;
-    EditText inputCnpj;
-    EditText inputCity;
-    EditText inputNBales;
-    EditText inputBalesCash;
-    Spinner spinnerUf;
-    Button btnRegisterProvider;
-    Provider provider;
     int position;
     int requestCode;
 
@@ -48,6 +49,9 @@ public class EditProviderActivity extends AppCompatActivity {
         inputBalesCash = (EditText) findViewById(R.id.inputBalesCash);
         spinnerUf = (Spinner) findViewById(R.id.spinnerUf);
         btnRegisterProvider = (Button) findViewById(R.id.btnRegisterProvider);
+        txtTitleToolbar = (TextView) findViewById(R.id.txtTitleToolbar);
+
+        txtTitleToolbar.setText("Cadastrar Viagem");
 
         Bundle bundle = getIntent().getExtras();
         requestCode = bundle.getInt("request_code");
@@ -128,10 +132,6 @@ public class EditProviderActivity extends AppCompatActivity {
     }
 
     public void onClickReturn(View view){
-        Bundle bundle = new Bundle();
-        Intent returnIntent = new Intent();
-        returnIntent.putExtras(bundle);
-        setResult(Activity.RESULT_OK, returnIntent);
         finish();
     }
 

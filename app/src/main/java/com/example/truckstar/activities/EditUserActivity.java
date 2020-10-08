@@ -22,10 +22,11 @@ import com.example.truckstar.R;
 import com.example.truckstar.entities.User;
 
 public class EditUserActivity extends AppCompatActivity {
-    EditText inputNameUser;
-    EditText inputNickName;
-    EditText inputPassUser;
-    Button btnSalvarUser;
+    private EditText inputNameUser;
+    private EditText inputNickName;
+    private EditText inputPassUser;
+    private Button btnSalvarUser;
+    private TextView txtTitleToolbar;
 
     User user;
     int position;
@@ -40,6 +41,9 @@ public class EditUserActivity extends AppCompatActivity {
         inputNickName = (EditText) findViewById(R.id.inputNickName);
         inputPassUser = (EditText) findViewById(R.id.inputPassUser);
         btnSalvarUser = (Button) findViewById(R.id.btnSalvarUser);
+        txtTitleToolbar = (TextView) findViewById(R.id.txtTitleToolbar);
+
+        txtTitleToolbar.setText("Cadastrar Usuário");
 
         Bundle bundle = getIntent().getExtras();
         requestCode = bundle.getInt("request_code");
@@ -94,10 +98,6 @@ public class EditUserActivity extends AppCompatActivity {
     }
 
     public void onClickReturn(View view){
-        Bundle bundle = new Bundle();
-        Intent returnIntent = new Intent();
-        returnIntent.putExtras(bundle);
-        setResult(Activity.RESULT_OK, returnIntent);
         finish();
     }
 

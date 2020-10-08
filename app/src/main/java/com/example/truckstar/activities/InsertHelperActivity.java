@@ -26,10 +26,11 @@ import com.example.truckstar.entities.TripWithHelpers;
 import java.util.concurrent.TimeUnit;
 
 public class InsertHelperActivity extends AppCompatActivity {
-    EditText inputNameHelper;
-    EditText inputCpfHelper;
-    EditText inputHelperValue;
-    Button btnRegistraHelper;
+    private EditText inputNameHelper;
+    private EditText inputCpfHelper;
+    private EditText inputHelperValue;
+    private Button btnRegistraHelper;
+    private TextView txtTitleToolbar;
     Helper helper;
     long id_trip;
     AppDatabase db;
@@ -43,7 +44,9 @@ public class InsertHelperActivity extends AppCompatActivity {
         inputCpfHelper = (EditText) findViewById(R.id.inputCpfHelper);
         inputHelperValue = (EditText) findViewById(R.id.inputHelperValue);
         btnRegistraHelper = (Button) findViewById(R.id.btnRegistraHelper);
+        txtTitleToolbar = (TextView) findViewById(R.id.txtTitleToolbar);
 
+        txtTitleToolbar.setText("Cadastrar Chapa");
         db = AppDatabase.getDatabase(this);
 
         Bundle bundle = getIntent().getExtras();
@@ -123,6 +126,14 @@ public class InsertHelperActivity extends AppCompatActivity {
         toast.setDuration(Toast.LENGTH_SHORT);
         toast.setView(layout);
         toast.show();
+    }
+
+    public void onClickReturn(View view){
+        Bundle bundle = new Bundle();
+        Intent returnIntent = new Intent();
+        returnIntent.putExtras(bundle);
+        setResult(Activity.RESULT_OK, returnIntent);
+        finish();
     }
 
 }

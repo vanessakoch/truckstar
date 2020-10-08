@@ -30,12 +30,13 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class SpendActivity  extends AppCompatActivity {
-    Spinner spinnerProvider;
-    EditText inputKm;
-    EditText inputCart;
-    EditText inputCashExtra;
-    Button btnRecivied;
-    Button btnTripConclude;
+    private Spinner spinnerProvider;
+    private EditText inputKm;
+    private EditText inputCart;
+    private EditText inputCashExtra;
+    private Button btnRecivied;
+    private Button btnTripConclude;
+    private TextView txtTitleToolbar;
     Trip trip;
     long id_trip;
     AppDatabase db;
@@ -52,7 +53,9 @@ public class SpendActivity  extends AppCompatActivity {
         inputCashExtra = (EditText) findViewById(R.id.inputCashExtra);
         btnRecivied = (Button) findViewById(R.id.btnRecivied);
         btnTripConclude = (Button) findViewById(R.id.btnTripConclude);
+        txtTitleToolbar = (TextView) findViewById(R.id.txtTitleToolbar);
 
+        txtTitleToolbar.setText("Cadastre os Gastos");
         Bundle bundle = getIntent().getExtras();
         user_id = bundle.getLong("user_id");
 

@@ -6,32 +6,39 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import com.example.truckstar.R;
 import com.example.truckstar.database.AppDatabase;
+import com.example.truckstar.entities.Provider;
 import com.example.truckstar.entities.TripWithData;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
 import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 
 public class ReportActivity extends AppCompatActivity {
-    Spinner spinnerDay;
-    Spinner spinnerMonth;
-    Spinner spinnerYear;
-    Button btnReport;
-    Button btnReportDay;
-    List<TripWithData> tripList;
-    AppDatabase db;
+    private Spinner spinnerDay;
+    private Spinner spinnerMonth;
+    private Spinner spinnerYear;
+    private Button btnReport;
+    private Button btnReportDay;
+    private List<TripWithData> tripList;
+    private AppDatabase db;
+    private TextView txtTitleToolbar;
 
     private static final int STORAGE_CODE = 1000;
 
@@ -49,16 +56,18 @@ public class ReportActivity extends AppCompatActivity {
         spinnerYear = (Spinner) findViewById(R.id.spinnerYear);
         btnReport = (Button) findViewById(R.id.btnReport);
         btnReportDay = (Button) findViewById(R.id.btnReportDay);
+        txtTitleToolbar = (TextView) findViewById(R.id.txtTitleToolbar);
+
+        txtTitleToolbar.setText("Emitir Relatórios");
 
         db = AppDatabase.getDatabase(this);
         tripList = new ArrayList<TripWithData>();
 
         if(tripList.size() > 0) {
-            for(TripWithData t : tripList) {
+            for (TripWithData t : tripList) {
                 tripList.remove(t);
             }
         }
-
     }
 
     public void onClickCreateReportWithAll(View view) {
@@ -72,7 +81,7 @@ public class ReportActivity extends AppCompatActivity {
             }
         });
 
-        checkPermission("Relatório gerado com todos os dados");
+        checkPermission("Relatório gerado com todos os dados da aplicação");
     }
 
     public void onClickCreateReportByDay(View view) {
@@ -116,9 +125,44 @@ public class ReportActivity extends AppCompatActivity {
         templatePDF.addParagraph(typeReport);
         templatePDF.createTable(header, getTrips());
         templatePDF.closeDocument();
+
+        final AlertDialog.Builder mBuilder = new AlertDialog.Builder(this);
+        LayoutInflater inflater = LayoutInflater.from(this);
+        View v = inflater.inflate(R.layout.dialog_pdf_view, null);
+
+        Button btnLocal = (Button) v.findViewById(R.id.btnLocal);
+        Button btnAdobe = (Button) v.findViewById(R.id.btnAdobe);
+
+        mBuilder.setView(v);
+        final AlertDialog dialog = mBuilder.create();
+        dialog.show();
+
+        btnLocal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                viewLocal();
+                finish();
+                dialog.dismiss();
+            }
+        });
+
+        btnAdobe.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                viewAdobe();
+                finish();
+                dialog.dismiss();
+            }
+        });
+    }
+
+    public void viewLocal() {
         templatePDF.viewPDF();
     }
 
+    public void viewAdobe() {
+        templatePDF.viewApp();
+    }
 
     private ArrayList<String[]> getTrips(){
         ArrayList<String[]> rows = new ArrayList<>();
@@ -133,6 +177,7 @@ public class ReportActivity extends AppCompatActivity {
             });
 
         }
+
         return rows;
     }
 
@@ -167,6 +212,14 @@ public class ReportActivity extends AppCompatActivity {
     }
 
     private void openActivity() {
+    }
+
+    public void onClickReturn(View view) {
+        Bundle bundle = new Bundle();
+        Intent returnIntent = new Intent();
+        returnIntent.putExtras(bundle);
+        setResult(Activity.RESULT_OK, returnIntent);
+        finish();
     }
 
 }

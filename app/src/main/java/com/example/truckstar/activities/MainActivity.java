@@ -36,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
     public final static int REQUEST_PROVIDER = 8;
     public final static int REQUEST_USER = 9;
     public final static int REQUEST_REPORT = 10;
+    public final static int REQUEST_RETURN_PDF = 11;
 
     EditText inputLogin;
     EditText inputPassword;

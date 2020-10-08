@@ -38,7 +38,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="5dp"
-                android:text="Lista de Entregas"
+                android:text="Lista de Viagens"
                 android:textColor="#fff"
                 android:textSize="20sp"
                 android:textStyle="bold" />
