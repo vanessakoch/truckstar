@@ -66,7 +66,9 @@ public class MainActivity extends AppCompatActivity {
             AppDatabase.databaseWriteExecutor.execute(new Runnable() {
                 @Override
                 public void run() {
-                    db.userDao().insertUser(new User("Admin", "truckstar", "2028"));
+                    if(db.userDao().findByName("Admin") == null) {
+                        db.userDao().insertUser(new User("Admin", "truckstar", "2028"));
+                    }
                     user_login = db.userDao().getUserAuth(inputLogin.getText().toString(), inputPassword.getText().toString());
                 }
             });

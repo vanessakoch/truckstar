@@ -3,12 +3,12 @@ package com.example.truckstar.activities;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Spinner;
-
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -116,12 +116,7 @@ public class ReportActivity extends AppCompatActivity {
         templatePDF.addParagraph(typeReport);
         templatePDF.createTable(header, getTrips());
         templatePDF.closeDocument();
-
-        Bundle bundle = new Bundle();
-        Intent returnIntent = new Intent();
-        returnIntent.putExtras(bundle);
-        setResult(Activity.RESULT_OK, returnIntent);
-        finish();
+        templatePDF.viewPDF();
     }
 
 

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">truckstar</string>
+    <string name="app_name">TruckStar</string>
 
     <string-array name="lista_uf">
         <item>UF</item>

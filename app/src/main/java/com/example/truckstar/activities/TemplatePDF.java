@@ -1,6 +1,9 @@
 package com.example.truckstar.activities;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Environment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -9,6 +12,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.core.content.FileProvider;
 
 import com.example.truckstar.R;
 import com.itextpdf.text.BaseColor;
@@ -121,6 +126,13 @@ public class TemplatePDF {
         }
     }
 
+    public void viewPDF() {
+        Intent intent = new Intent(context, ViewPDFActivity.class);
+        intent.putExtra("path", pdfFile.getAbsolutePath());
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        context.startActivity(intent);
+    }
+
     public void createTable(String[] header, ArrayList<String[]> arrayList) {
         try {
             int indexC = 0;
@@ -154,6 +166,6 @@ public class TemplatePDF {
         }catch (Exception e){
             Log.e("createTable", e.toString());
         }
-
     }
+
 }
