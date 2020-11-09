@@ -13,19 +13,16 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import com.example.truckstar.R;
 import com.example.truckstar.database.AppDatabase;
-import com.example.truckstar.entities.Provider;
 import com.example.truckstar.entities.TripWithData;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
 import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
@@ -107,6 +104,7 @@ public class ReportActivity extends AppCompatActivity {
                     PackageManager.PERMISSION_DENIED){
                 String[] permissions = {WRITE_EXTERNAL_STORAGE};
                 requestPermissions(permissions, STORAGE_CODE);
+                finish();
             }
             else {
                 onCreateDocumentPdf(typeReport);
