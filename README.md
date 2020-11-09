@@ -21,8 +21,9 @@ Foi utilizando **Recycler View** e **Card View** para a interação com os objet
 
 <br />
 
-<iframe src="https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:6722965578564284416?compact=1" height="284" width="504" frameborder="0" allowfullscreen="" title="Publicação incorporada"></iframe>
-
+<h3 align="center">
+  <img src="uploads/TruckStarApp.gif"/>
+</h3>
 <br />
 
 <p align="center">Desenvolvido com :purple_heart: por  Vanessa Ribeiro Koch</p>
