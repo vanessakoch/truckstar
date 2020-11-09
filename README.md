@@ -5,8 +5,14 @@
 ---
 <br />
 
-## 😊 Tecnologias 
-Foi criado em linguagem **Java**, utilizando o **Android Studio** como IDE. Foi utilizando **Recycler View** e **Card View** para a interação com os objetos, **itextpdf** e **android-pdf-viewer** para a criação do relatório PDF e visualização no próprio aplicativo ou externamente, layout utilizando **ConstraintLayout** e o bancon de dados **Room**.
+## 😊 Sobre 
+
+O aplicativo foi feito em **Java**, os dados foram salvos em um banco de dados relacional local, chamado **Room**, utilizando o **AndroidStudio**.
+Ele contém um CRUD de viagens e usuários, um menu para que o motorista consiga cadastrar os gastos de uma viagem específica, por exemplo, gastos com o estacionamento, uso de carrinho, gastos com os ajudantes na descarga, entre outros...
+O app também trás a possibilidade de gerar um relatório PDF das viagens que foram feitas e seu total de gastos, podendo buscar por uma data específica ou por todos os dados cadastrados.
+Esse PDF ficará salvo no celular e poderá ser aberto no próprio aplicativo ou escolhendo o próprio Adobe para visualização, permitindo salvar o documento onde desejar.
+
+Foi utilizando **Recycler View** e **Card View** para a interação com os objetos, **itextpdf** e **android-pdf-viewer** para a criação do relatório PDF e visualização no próprio aplicativo ou externamente e o layout utilizando **ConstraintLayout**.
 
 <br />
 
@@ -15,14 +21,8 @@ Foi criado em linguagem **Java**, utilizando o **Android Studio** como IDE. Foi 
 
 <br />
 
-<h3 align="center">
-  <iframe src="uploads/TruckStarApp.mkv"> 
-  </iframe>
-</h3>
+<iframe src="uploads/TruckStarApp.mkv" height="500" width="50" frameborder="0" allowfullscreen="" title="App"></iframe>
 
-<br >
-
-[Clique aqui para jogar](https://laughing-jang-8b58e3.netlify.app/)
 
 <br />
 
