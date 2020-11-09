@@ -21,8 +21,7 @@ Foi utilizando **Recycler View** e **Card View** para a interação com os objet
 
 <br />
 
-<iframe src="uploads/TruckStarApp.mkv" height="500" width="50" frameborder="0" allowfullscreen="" title="App"></iframe>
-
+<iframe src="https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:6722965578564284416?compact=1" height="284" width="504" frameborder="0" allowfullscreen="" title="Publicação incorporada"></iframe>
 
 <br />
 
